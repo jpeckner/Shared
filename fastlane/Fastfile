@@ -1,0 +1,8 @@
+
+lane :shared_ci_tests do |options|
+  run_tests(
+    project: "Shared.xcodeproj",
+    scheme: "Shared-Release",
+    clean: true
+  )
+end
