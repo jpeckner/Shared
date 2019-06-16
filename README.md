@@ -1,6 +1,6 @@
 # jpeckner/Shared
 
-Shared is an iOS framework containing Swift code for networking, location services, UI, and more.
+Shared is a Swift iOS framework containing code for networking, location services, UI, and more.
 
 ### Prerequisites
 
