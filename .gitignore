@@ -1,0 +1,36 @@
+
+##### Fastlane #####
+
+# fastlane specific
+**/fastlane/report.xml
+
+# deliver temporary files
+**/fastlane/Preview.html
+
+# snapshot generated screenshots
+**/fastlane/screenshots
+
+# scan temporary files
+**/fastlane/test_output
+
+**/fastlane/README.md
+
+.env
+
+##### Slather #####
+
+Slather
+
+##### Sourcery #####
+
+**/Sourcery/Output
+
+##### Carthage #####
+
+Carthage
+
+##### Other #####
+Shared.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+Shared.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+Shared.xcodeproj/project.xcworkspace/xcuserdata/jpeckner.xcuserdatad/
+xcschememanagement.plist
