@@ -46,20 +46,6 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "970B152482D839924C6352AC1D7BBD22"
-               BuildableName = "SharedIntegrationTests.xctest"
-               BlueprintName = "SharedIntegrationTests"
-               ReferencedContainer = "container:Shared.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BF0761FEBE21DA20CE57F00EBF1BA6E4"
                BuildableName = "SharedTestComponents.framework"
                BlueprintName = "SharedTestComponents"
@@ -96,17 +82,6 @@
                BlueprintIdentifier = "1B1376E59ED7F9AA6CB3D0FFE0DAEE92"
                BuildableName = "SharedTests.xctest"
                BlueprintName = "SharedTests"
-               ReferencedContainer = "container:Shared.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "970B152482D839924C6352AC1D7BBD22"
-               BuildableName = "SharedIntegrationTests.xctest"
-               BlueprintName = "SharedIntegrationTests"
                ReferencedContainer = "container:Shared.xcodeproj">
             </BuildableReference>
          </TestableReference>
