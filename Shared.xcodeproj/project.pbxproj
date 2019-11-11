@@ -90,6 +90,10 @@
 		C672D13652CF245521230F35B6579363 /* HTTPServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313636CB848D834B8583DD8196AD7C76 /* HTTPServiceTests.swift */; };
 		CA39865A80438CEF6BF47E117F24E901 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1E3D7B4193AEC5784AE024D25B1A /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA89B89322B5CF0A00CBECE0 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */; };
+		CAE208AE2378ED4000F1AED9 /* Text+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */; };
+		CAE208B02378ED7E00F1AED9 /* UIFont+CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */; };
+		CAE208B22378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208B12378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift */; };
+		CAE208B42378EE7900F1AED9 /* Button+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208B32378EE7900F1AED9 /* Button+Styling.swift */; };
 		CEE4C2EB44E7BDD95EB1D0C62BDC003B /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5EAD4D7BAC3DE0F2F77C0FACB6F8A6 /* HTTPService.swift */; };
 		D0D2DEF1748CBBDC0DFED6DF15444FD6 /* HTTPURLResponse+ErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC340E92C8DCFBF801E521615F479C4 /* HTTPURLResponse+ErrorTests.swift */; };
 		D6CF2CD1CCDADC2DCBDC2828BAD70B41 /* UIButton+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262A39505C4244DB986289DAB962D88D /* UIButton+Size.swift */; };
@@ -250,6 +254,10 @@
 		C805DA40A5E72108B6F72819FDC89EF8 /* TextColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextColoring.swift; sourceTree = "<group>"; };
 		CA5B668F22B18473002E1C86 /* run_sourcery.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run_sourcery.sh; sourceTree = "<group>"; };
 		CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
+		CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Styling.swift"; sourceTree = "<group>"; };
+		CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CTFont.swift"; sourceTree = "<group>"; };
+		CAE208B12378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAlignment+TextAlignment.swift"; sourceTree = "<group>"; };
+		CAE208B32378EE7900F1AED9 /* Button+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Styling.swift"; sourceTree = "<group>"; };
 		CCE5DED3527BAD6A01F3CDC62A7A3EBC /* DecoderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderProtocol.swift; sourceTree = "<group>"; };
 		CDA27AD0FB0B3E59FA5EEAC243B5F253 /* FailableDecodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableDecodableTests.swift; sourceTree = "<group>"; };
 		D26416BF1F1187E686DAE56E452DF244 /* AutoCellType.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoCellType.stencil; sourceTree = "<group>"; };
@@ -594,7 +602,11 @@
 		9F4205FD4931306C05CE552CE66ED922 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CAE208B32378EE7900F1AED9 /* Button+Styling.swift */,
+				CAE208B12378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift */,
+				CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */,
 				79AF7EDC930EEEF27E5CAE23CB76860C /* UIButton+Styling.swift */,
+				CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */,
 				5D0AA338EF788FE0E0186632A4B6BC7E /* UILabel+Styling.swift */,
 				48E3A34E13F11C7AD2CBBDEB244A4414 /* UITextField+Styling.swift */,
 			);
@@ -919,6 +931,7 @@
 				ECD2C928DC8C3F678A0F35773ED3C10C /* LocationCoordinate.swift in Sources */,
 				1A5B585D6FB5E1D53A6368B838D3AE29 /* LocationDelegateHandler.swift in Sources */,
 				A6D2C5424DC91A6A5DFA4F29B80DC1C2 /* LocationRequestHandler.swift in Sources */,
+				CAE208B02378ED7E00F1AED9 /* UIFont+CTFont.swift in Sources */,
 				65456AD3BDADA0FCE9628D44BD87F6E4 /* MKMapView+Region.swift in Sources */,
 				D98EBF5FB75F610FBE993705846C1859 /* MeasurementSystem.swift in Sources */,
 				8FA64890312FA65C3E4F9EA47E8377BC /* NetworkDataService.swift in Sources */,
@@ -930,10 +943,13 @@
 				FEFFFF2F68808735A7CF93C9B7E0D6CE /* SpecifiedSizeClass.swift in Sources */,
 				6EB4A9B3184EF64A578E06208CA71140 /* String+CharacterSet.swift in Sources */,
 				6BCF6EDA8DA2C08688CE8263EE8D418E /* StyledLabel.swift in Sources */,
+				CAE208B22378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift in Sources */,
 				987B76B1E883EAC9F98981B059286914 /* TextColoring.swift in Sources */,
 				FCE32D3660BDEAF7251D708B9CC2233E /* TextLayout.swift in Sources */,
+				CAE208AE2378ED4000F1AED9 /* Text+Styling.swift in Sources */,
 				D6CF2CD1CCDADC2DCBDC2828BAD70B41 /* UIButton+Size.swift in Sources */,
 				8CD09B489EE0AB673E4C630B38DC6B19 /* UIButton+Styling.swift in Sources */,
+				CAE208B42378EE7900F1AED9 /* Button+Styling.swift in Sources */,
 				5788983ED127EE22304C962A16D523C3 /* UIColor+Components.swift in Sources */,
 				22AAA70ACA35B6B73D281A613755805C /* UIColor+Init.swift in Sources */,
 				31AA05E003FB6C0D5FAFF29C61B6C87A /* UIColorDecodable.swift in Sources */,
@@ -1020,6 +1036,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					SwiftUI,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinpeckner.Shared;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1042,6 +1062,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					SwiftUI,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.justinpeckner.Shared;
 				SDKROOT = iphoneos;
