@@ -6,6 +6,7 @@
 //  Copyright © 2018 Justin Peckner. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 
 public struct TextColoring: Equatable {
@@ -26,6 +27,15 @@ extension TextColoring: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.textColor = try container.decode(UIColorDecodable.self,
                                               forKey: .textColor).value
+    }
+
+}
+
+@available(iOS 13.0, *)
+public extension TextColoring {
+
+    var color: Color {
+        return Color(textColor)
     }
 
 }
