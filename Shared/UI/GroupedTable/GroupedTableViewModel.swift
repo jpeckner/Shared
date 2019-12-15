@@ -22,17 +22,9 @@ public struct GroupedTableBasicCellViewModel: Equatable {
     }
 }
 
-public enum GroupedTableViewCellStyle: Equatable, AutoCellType {
+public enum GroupedTableViewCellModel: Equatable, AutoCellType {
     // sourcery: cellType = "UITableViewCell"
     case basic(GroupedTableBasicCellViewModel)
-}
-
-public struct GroupedTableViewCellModel: Equatable {
-    public let cellStyle: GroupedTableViewCellStyle
-
-    public init(cellStyle: GroupedTableViewCellStyle) {
-        self.cellStyle = cellStyle
-    }
 }
 
 public struct GroupedTableViewSectionModel: Equatable {
