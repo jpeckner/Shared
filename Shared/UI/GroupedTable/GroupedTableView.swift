@@ -22,7 +22,7 @@ public class GroupedTableView: UITableView {
         super.init(frame: .zero, style: .grouped)
 
         dataSource = staticDataSource
-        GroupedTableViewCellStyle.allCellTypes.forEach { register($0) }
+        GroupedTableViewCellModel.allCellTypes.forEach { register($0) }
     }
 
     required init?(coder aDecoder: NSCoder) {

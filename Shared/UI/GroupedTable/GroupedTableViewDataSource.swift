@@ -35,7 +35,7 @@ extension GroupedTableViewDataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellStyle = tableModel.sectionModels[indexPath.section].cellModels[indexPath.row].cellStyle
+        let cellStyle = tableModel.sectionModels[indexPath.section].cellModels[indexPath.row]
         let cell = tableView.dequeueReusableCell(withCellType: cellStyle.cellType, for: indexPath)
 
         AssertionHandler.assertIfErrorThrown {
@@ -51,7 +51,7 @@ extension GroupedTableViewDataSource: UITableViewDataSource {
 
 }
 
-private extension GroupedTableViewCellStyle {
+private extension GroupedTableViewCellModel {
 
     func customizeCell(_ cell: UITableViewCell) throws {
         switch self {
