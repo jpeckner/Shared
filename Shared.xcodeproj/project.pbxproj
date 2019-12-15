@@ -90,6 +90,7 @@
 		C672D13652CF245521230F35B6579363 /* HTTPServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313636CB848D834B8583DD8196AD7C76 /* HTTPServiceTests.swift */; };
 		CA39865A80438CEF6BF47E117F24E901 /* Quick.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F5A1E3D7B4193AEC5784AE024D25B1A /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA89B89322B5CF0A00CBECE0 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */; };
+		CA8E27D423A5AEB70044A653 /* IgnoredHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E27D323A5AEB70044A653 /* IgnoredHashable.swift */; };
 		CAE208AE2378ED4000F1AED9 /* Text+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */; };
 		CAE208B02378ED7E00F1AED9 /* UIFont+CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */; };
 		CAE208B22378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208B12378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift */; };
@@ -257,6 +258,7 @@
 		C805DA40A5E72108B6F72819FDC89EF8 /* TextColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextColoring.swift; sourceTree = "<group>"; };
 		CA5B668F22B18473002E1C86 /* run_sourcery.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run_sourcery.sh; sourceTree = "<group>"; };
 		CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
+		CA8E27D323A5AEB70044A653 /* IgnoredHashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredHashable.swift; sourceTree = "<group>"; };
 		CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Styling.swift"; sourceTree = "<group>"; };
 		CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CTFont.swift"; sourceTree = "<group>"; };
 		CAE208B12378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextAlignment+TextAlignment.swift"; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 				AEA088AC9C09E4DB43A7FBA32D3BC73C /* CastingFunctions.swift */,
 				953AF9384A19343133622528166FB860 /* FailableDecodable.swift */,
 				556AB1E9DAED21A2DD23CF14F85CA22A /* IgnoredEquatable.swift */,
+				CA8E27D323A5AEB70044A653 /* IgnoredHashable.swift */,
 				8FB0F6CC8FA4CDD7CB105EDB85C6E183 /* MeasurementSystem.swift */,
 				0ADE188D529B99B50B31CBDA38C28931 /* NonEmptyArray.swift */,
 				C0381199AB93E95DFA6ABE661A1C7437 /* NonEmptyString.swift */,
@@ -968,6 +971,7 @@
 				725343B4CEC168F171FB42F34B468D75 /* UIImage+Size.swift in Sources */,
 				03C91166A9B83EC3FEA1EEA5047D2D41 /* UIImageView+Init.swift in Sources */,
 				15C55223D36CEBD46DDDCC8514205441 /* UILabel+Styling.swift in Sources */,
+				CA8E27D423A5AEB70044A653 /* IgnoredHashable.swift in Sources */,
 				73CA0A5A4D7D07CB4AD9907FD1FF8BB8 /* UILabel+Text.swift in Sources */,
 				5ACAC98C04089743411868174F16BFA5 /* UIScrollView+Bounce.swift in Sources */,
 				D8987A934228FB0059954552B8D6B2F9 /* UITableView+Registration.swift in Sources */,
