@@ -10,7 +10,7 @@ import UIKit
 
 public class ActionableButton: UIButton {
 
-    private let touchUpInsideCallback: () -> Void
+    public var touchUpInsideCallback: () -> Void
 
     public init(touchUpInsideCallback: @escaping () -> Void) {
         self.touchUpInsideCallback = touchUpInsideCallback
