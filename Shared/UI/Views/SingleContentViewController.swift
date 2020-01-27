@@ -11,12 +11,18 @@ import UIKit
 open class SingleContentViewController: UIViewController {
 
     private let contentView: UIView
-    private let backgroundColor: UIColor
+
+    public var viewColoring: ViewColoring {
+        didSet {
+            guard isViewLoaded else { return }
+            view.backgroundColor = viewColoring.backgroundColor
+        }
+    }
 
     public init(contentView: UIView,
                 viewColoring: ViewColoring) {
         self.contentView = contentView
-        self.backgroundColor = viewColoring.backgroundColor
+        self.viewColoring = viewColoring
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,7 +39,7 @@ open class SingleContentViewController: UIViewController {
 
         // Ensure that background color fills the entire view, not just the safe area
         contentView.backgroundColor = .clear
-        view.backgroundColor = backgroundColor
+        view.backgroundColor = viewColoring.backgroundColor
     }
 
 }
