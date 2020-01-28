@@ -790,6 +790,7 @@
 			buildPhases = (
 				B95A3BEF9B0FD03891F6FA254CAD48A0 /* Carthage Verify */,
 				F612077A3F95A743DAB54300AF437F85 /* Headers */,
+				CA23235F23DFD1EF00566E07 /* Sourcery */,
 				AD74B58C499707A60EFE16AECBB88ECC /* Sources */,
 			);
 			buildRules = (
@@ -865,6 +866,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"$SRCROOT/BuildScripts/carthage_verify.sh\"\n";
+		};
+		CA23235F23DFD1EF00566E07 /* Sourcery */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Sourcery;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BuildScripts/run_sourcery.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
