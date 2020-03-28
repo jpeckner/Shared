@@ -129,7 +129,7 @@ class NetworkDataServiceTests: QuickSpec {
                     it("passes back .failure(.unexpectedResponseArgs)") {
                         expect(returnedResult) == .failure(.unexpectedResponseArgs(stubData,
                                                                                    nil,
-                                                                                   IgnoredEquatable(nil)))
+                                                                                   nil))
                     }
 
                 }
@@ -179,7 +179,7 @@ class NetworkDataServiceTests: QuickSpec {
                 it("passes back .failure(.unexpectedResponseArgs)") {
                     expect(returnedResult) == .failure(.unexpectedResponseArgs(nil,
                                                                                nil,
-                                                                               IgnoredEquatable(nil)))
+                                                                               nil))
                 }
 
             }

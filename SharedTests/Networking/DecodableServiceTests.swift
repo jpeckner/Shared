@@ -16,6 +16,7 @@ class DecodableServiceTests: QuickSpec {
 
     // swiftlint:disable function_body_length
     // swiftlint:disable implicitly_unwrapped_optional
+    // swiftlint:disable line_length
     override func spec() {
 
         let stubData = Data(1...5)
@@ -62,7 +63,12 @@ class DecodableServiceTests: QuickSpec {
                         }
 
                         it("passes back the decoded object") {
-                            expect(returnedResult) == .success(stubDecodable)
+                            guard case let .success(returnedDecodable) = returnedResult else {
+                                fail("Unexpected result: \(String(describing: returnedResult))")
+                                return
+                            }
+
+                            expect(returnedDecodable) == stubDecodable
                         }
 
                     }
@@ -78,11 +84,17 @@ class DecodableServiceTests: QuickSpec {
                         }
 
                         it("passes back error .failedToDecodeObject") {
-                            expect(returnedResult) == .failure(.unexpected(.failedToDecodeObject(
-                                stubData,
-                                stubURLResponse,
-                                underlyingError: IgnoredEquatable(StubError.plainError)
-                            )))
+                            guard case let .failure(returnedError) = returnedResult,
+                                case let .unexpected(unexpectedError) = returnedError,
+                                case let .failedToDecodeObject(data, urlResponse, underlyingError) = unexpectedError
+                            else {
+                                fail("Unexpected result: \(String(describing: returnedResult))")
+                                return
+                            }
+
+                            expect(data) == stubData
+                            expect(urlResponse) == stubURLResponse
+                            expect(underlyingError as? StubError) == .plainError
                         }
 
                     }
@@ -102,7 +114,15 @@ class DecodableServiceTests: QuickSpec {
                     }
 
                     it("passes back error .noDataReturned") {
-                        expect(returnedResult) == .failure(.unexpected(.noDataReturned(stubURLResponse)))
+                        guard case let .failure(returnedError) = returnedResult,
+                            case let .unexpected(unexpectedError) = returnedError,
+                            case let .noDataReturned(urlResponse) = unexpectedError
+                        else {
+                            fail("Unexpected result: \(String(describing: returnedResult))")
+                            return
+                        }
+
+                        expect(urlResponse) == stubURLResponse
                     }
 
                 }
@@ -132,7 +152,15 @@ class DecodableServiceTests: QuickSpec {
                         }
 
                         it("passes back error .errorPayloadReturned") {
-                            expect(returnedResult) == .failure(.errorPayloadReturned(stubErrorPayload, stubURLResponse))
+                            guard case let .failure(returnedError) = returnedResult,
+                                case let .errorPayloadReturned(errorPayload, urlResponse) = returnedError
+                            else {
+                                fail("Unexpected result: \(String(describing: returnedResult))")
+                                return
+                            }
+
+                            expect(errorPayload) == stubErrorPayload
+                            expect(urlResponse) == stubURLResponse
                         }
 
                     }
@@ -148,11 +176,17 @@ class DecodableServiceTests: QuickSpec {
                         }
 
                         it("passes back error .failedToDecodeErrorPayload") {
-                            expect(returnedResult) == .failure(.unexpected(.failedToDecodeErrorPayload(
-                                stubData,
-                                stubURLResponse,
-                                underlyingError: IgnoredEquatable(StubError.plainError)))
-                            )
+                            guard case let .failure(returnedError) = returnedResult,
+                                case let .unexpected(unexpectedError) = returnedError,
+                                case let .failedToDecodeErrorPayload(data, urlResponse, underlyingError) = unexpectedError
+                            else {
+                                fail("Unexpected result: \(String(describing: returnedResult))")
+                                return
+                            }
+
+                            expect(data) == stubData
+                            expect(urlResponse) == stubURLResponse
+                            expect(underlyingError as? StubError) == .plainError
                         }
 
                     }
@@ -174,9 +208,15 @@ class DecodableServiceTests: QuickSpec {
                     }
 
                     it("passes back error .httpServiceError") {
-                        expect(returnedResult) == .failure(.unexpected(.httpServiceError(
-                            underlyingError: stubHTTPServiceError
-                        )))
+                        guard case let .failure(returnedError) = returnedResult,
+                            case let .unexpected(unexpectedError) = returnedError,
+                            case let .httpServiceError(underlyingError) = unexpectedError
+                        else {
+                            fail("Unexpected result: \(String(describing: returnedResult))")
+                            return
+                        }
+
+                        expect(underlyingError) == stubHTTPServiceError
                     }
 
                 }
@@ -198,9 +238,15 @@ class DecodableServiceTests: QuickSpec {
                 }
 
                 it("passes back error .httpServiceError") {
-                    expect(returnedResult) == .failure(.unexpected(.httpServiceError(
-                        underlyingError: stubHTTPServiceError
-                    )))
+                    guard case let .failure(returnedError) = returnedResult,
+                        case let .unexpected(unexpectedError) = returnedError,
+                        case let .httpServiceError(underlyingError) = unexpectedError
+                    else {
+                        fail("Unexpected result: \(String(describing: returnedResult))")
+                        return
+                    }
+
+                    expect(underlyingError) == stubHTTPServiceError
                 }
 
             }
@@ -210,8 +256,8 @@ class DecodableServiceTests: QuickSpec {
                 let stubHTTPServiceError = HTTPServiceError.networkDataServiceError(.unexpectedResponseArgs(
                     nil,
                     nil,
-                    IgnoredEquatable(nil))
-                )
+                    nil
+                ))
 
                 beforeEach {
                     mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
@@ -224,9 +270,15 @@ class DecodableServiceTests: QuickSpec {
                 }
 
                 it("passes back error .httpServiceError") {
-                    expect(returnedResult) == .failure(.unexpected(.httpServiceError(
-                        underlyingError: stubHTTPServiceError
-                    )))
+                    guard case let .failure(returnedError) = returnedResult,
+                        case let .unexpected(unexpectedError) = returnedError,
+                        case let .httpServiceError(underlyingError) = unexpectedError
+                    else {
+                        fail("Unexpected result: \(String(describing: returnedResult))")
+                        return
+                    }
+
+                    expect(underlyingError) == stubHTTPServiceError
                 }
 
             }
