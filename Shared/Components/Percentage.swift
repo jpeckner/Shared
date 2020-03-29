@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Percentage: Hashable {
-    public static let oneHundredPercent = Percentage(value: 1.0)
-    public static let zeroPercent = Percentage(value: 0.0)
+    public static let oneHundredPercent = Percentage(fromPercentageInt: 100)
+    public static let zeroPercent = Percentage(fromPercentageInt: 0)
 
     public let value: Double
 
@@ -18,7 +18,7 @@ public struct Percentage: Hashable {
         self.value = value - floor(value)
     }
 
-    private init(value: Double) {
-        self.value = value
+    public init(fromPercentageInt value: Int) {
+        self.value = Double(value) / 100.0
     }
 }
