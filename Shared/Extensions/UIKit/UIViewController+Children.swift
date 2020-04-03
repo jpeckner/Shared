@@ -14,24 +14,9 @@ public extension UIViewController {
         return children.first
     }
 
-    // The type: param isn't strictly necessary, but it prevents Swift from inferring that T's type, when not explicitly
-    // declared on the left-hand side of an assignment, is UIViewController.self (chances are that T is actually a
-    // subclass of UIViewController).
-    func setSingleChildIfNotPresent<T: UIViewController>(_ type: T.Type,
-                                                         initBlock: () -> T,
-                                                         addToViewBlock: (UIView) -> Void) -> T {
-        guard let child = firstChild as? T else {
-            let newChild = initBlock()
-            setSingleChildController(newChild, addToViewBlock: addToViewBlock)
-            return newChild
-        }
-
-        return child
-    }
-
     func setSingleChildController(_ child: UIViewController,
                                   addToViewBlock: (UIView) -> Void) {
-        children.first.map(removeChildController)
+        firstChild.map(removeChildController)
 
         addChild(child)
         addToViewBlock(child.view)

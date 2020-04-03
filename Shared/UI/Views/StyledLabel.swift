@@ -6,6 +6,7 @@
 //  Copyright © 2018 Justin Peckner. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
 
 public class StyledLabel: UILabel {
