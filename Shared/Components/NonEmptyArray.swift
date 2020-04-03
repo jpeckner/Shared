@@ -44,11 +44,15 @@ public extension NonEmptyArray {
     }
 
     func appendedWith(_ otherArray: [T]) -> NonEmptyArray<T> {
-        return NonEmptyArray(value: self.value + otherArray)
+        return NonEmptyArray(value: value + otherArray)
+    }
+
+    func sorted(by block: (T, T) -> Bool) -> NonEmptyArray<T> {
+        return NonEmptyArray(value: value.sorted(by: block))
     }
 
     func withTransformation<N>(transform: (T) -> N) -> NonEmptyArray<N> {
-        let transformedValue = self.value.map(transform)
+        let transformedValue = value.map(transform)
         return NonEmptyArray<N>(value: transformedValue)
     }
 
