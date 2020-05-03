@@ -16,15 +16,25 @@ public enum SearchBarEditEvent: CaseIterable {
     case endedEditing
 }
 
+// MARK: SearchBarConfig
+
+public struct SearchBarConfig {
+    let autocorrectionType: UITextAutocorrectionType
+    let keyboardType: UIKeyboardType
+    let returnKeyType: UIReturnKeyType
+    let enablesReturnKeyAutomatically: Bool
+}
+
 // MARK: SearchBarWrapper
 
 public protocol SearchBarWrapperDelegate: AnyObject {
     func searchBarWrapper(_ searchBarWrapper: SearchBarWrapper, didPerformEvent event: SearchBarEditEvent)
 
-    func searchBarWrapper(_ searchBarWrapper: SearchBarWrapper, didClickSearch text: NonEmptyString)
+    func searchBarWrapper(_ searchBarWrapper: SearchBarWrapper, didClickSearch text: String?)
 }
 
 public class SearchBarWrapper: NSObject {
+
     public weak var delegate: SearchBarWrapperDelegate?
 
     public var isFirstResponder: Bool = false {
@@ -48,15 +58,26 @@ public class SearchBarWrapper: NSObject {
     private let searchBar: UISearchBar
     private var didTapDeleteKey = false
 
-    override public init() {
+    public init(config: SearchBarConfig) {
         self.searchBar = UISearchBar()
-        searchBar.returnKeyType = .go
-        searchBar.enablesReturnKeyAutomatically = true
+        searchBar.autocorrectionType = config.autocorrectionType
+        searchBar.keyboardType = config.keyboardType
+        searchBar.returnKeyType = config.returnKeyType
+        searchBar.enablesReturnKeyAutomatically = config.enablesReturnKeyAutomatically
 
         super.init()
 
         searchBar.delegate = self
     }
+
+    override public convenience init() {
+        let config = SearchBarConfig(autocorrectionType: .yes,
+                                     keyboardType: .default,
+                                     returnKeyType: .go,
+                                     enablesReturnKeyAutomatically: true)
+        self.init(config: config)
+    }
+
 }
 
 public extension SearchBarWrapper {
@@ -100,14 +121,7 @@ extension SearchBarWrapper: UISearchBarDelegate {
     }
 
     public func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text,
-            let nonEmptyText = try? NonEmptyString(text)
-        else {
-            AssertionHandler.performAssertionFailure { "UISearchBar should be configured to not return empty text" }
-            return
-        }
-
-        delegate?.searchBarWrapper(self, didClickSearch: nonEmptyText)
+        delegate?.searchBarWrapper(self, didClickSearch: searchBar.text)
     }
 
 }
