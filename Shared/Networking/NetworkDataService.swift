@@ -36,7 +36,7 @@ extension NetworkDataServiceResponse {
 
 public enum NetworkDataServiceError: Error, Equatable {
     case requestError(underlyingError: IgnoredEquatable<Error>, response: URLResponse?)
-    case unexpectedResponseArgs(Data?, URLResponse?, IgnoredEquatable<Error?>)
+    case unexpectedResponseArgs(Data?, URLResponse?, IgnoredEquatable<Error>?)
     case otherError(IgnoredEquatable<Error>)
 }
 
@@ -103,7 +103,7 @@ public class NetworkDataService<TSession: URLSessionProtocol>: NetworkDataServic
             // urlResponse is nil, and also doesn't make sense for all three args to be nil.
             let networkError = NetworkDataServiceError.unexpectedResponseArgs(data,
                                                                               response,
-                                                                              IgnoredEquatable(error))
+                                                                              error.map { IgnoredEquatable($0) })
             completion(Result.failure(networkError))
         }
     }

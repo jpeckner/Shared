@@ -8,34 +8,36 @@
 
 import Foundation
 
-public enum DecodableServiceError<P: Decodable & Equatable>: Error, Equatable {
+public enum DecodableServiceError<TErrorPayload: Decodable>: Error {
     // If we do get an error, in theory it should have come from the API, containing a known error payload format
-    case errorPayloadReturned(P, HTTPURLResponse)
+    case errorPayloadReturned(TErrorPayload, HTTPURLResponse)
 
     // Any other error is unexpected
     case unexpected(DecodableServiceUnexpectedError)
 }
 
-public enum DecodableServiceUnexpectedError: Error, Equatable {
+public enum DecodableServiceUnexpectedError: Error {
     case httpServiceError(underlyingError: HTTPServiceError)
     case noDataReturned(URLResponse)
-    case failedToDecodeObject(Data, HTTPURLResponse, underlyingError: IgnoredEquatable<Error>)
-    case failedToDecodeErrorPayload(Data, HTTPURLResponse, underlyingError: IgnoredEquatable<Error>)
+    case failedToDecodeObject(Data, HTTPURLResponse, underlyingError: Error)
+    case failedToDecodeErrorPayload(Data, HTTPURLResponse, underlyingError: Error)
 }
 
 public typealias DecodableServiceResult<
-    T: Decodable,
-    P: Decodable & Equatable
-> = Result<T, DecodableServiceError<P>>
+    TEntity: Decodable,
+    TErrorPayload: Decodable
+> = Result<TEntity, DecodableServiceError<TErrorPayload>>
 
 public typealias DecodableServiceCompletion<
-    T: Decodable,
-    P: Decodable & Equatable
-> = (DecodableServiceResult<T, P>) -> Void
+    TEntity: Decodable,
+    TErrorPayload: Decodable
+> = (DecodableServiceResult<TEntity, TErrorPayload>) -> Void
 
 public protocol DecodableServiceProtocol {
-    func performRequest<T: Decodable, P: Decodable & Equatable>(_ urlRequest: URLRequest,
-                                                                completion: @escaping DecodableServiceCompletion<T, P>)
+    func performRequest<TEntity: Decodable, TErrorPayload: Decodable>(
+        _ urlRequest: URLRequest,
+        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
+    )
 }
 
 public class DecodableService: DecodableServiceProtocol {
@@ -49,9 +51,9 @@ public class DecodableService: DecodableServiceProtocol {
         self.decoder = decoder
     }
 
-    public func performRequest<T: Decodable, P: Decodable & Equatable>(
+    public func performRequest<TEntity: Decodable, TErrorPayload: Decodable>(
         _ urlRequest: URLRequest,
-        completion: @escaping DecodableServiceCompletion<T, P>
+        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
     ) {
         httpService.performHTTPRequest(urlRequest, successStatusCodes: [200]) { [weak self] result in
             switch result {
@@ -63,28 +65,28 @@ public class DecodableService: DecodableServiceProtocol {
         }
     }
 
-    private func handleHTTPResponse<T: Decodable, P: Decodable & Equatable>(
+    private func handleHTTPResponse<TEntity: Decodable, TErrorPayload: Decodable>(
         _ response: HTTPServiceResponse,
-        completion: @escaping DecodableServiceCompletion<T, P>
+        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
     ) {
         switch response {
         case let .withHTTPData(data, httpURLResponse):
             do {
-                let decodedObject = try decoder.decode(T.self, from: data)
+                let decodedObject = try decoder.decode(TEntity.self, from: data)
                 completion(.success(decodedObject))
             } catch {
                 completion(.failure(.unexpected(.failedToDecodeObject(data,
                                                                       httpURLResponse,
-                                                                      underlyingError: IgnoredEquatable(error)))))
+                                                                      underlyingError: error))))
             }
         case .sansHTTPData(let urlResponse):
             completion(.failure(.unexpected(.noDataReturned(urlResponse))))
         }
     }
 
-    private func handleHTTPError<T: Decodable, P: Decodable & Equatable>(
+    private func handleHTTPError<TEntity: Decodable, TErrorPayload: Decodable>(
         _ error: HTTPServiceError,
-        completion: @escaping DecodableServiceCompletion<T, P>
+        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
     ) {
         switch error {
         case let .nonSuccessfulStatusCode(data, httpURLResponse):
@@ -94,12 +96,12 @@ public class DecodableService: DecodableServiceProtocol {
             }
 
             do {
-                let decodedErrorPayload = try decoder.decode(P.self, from: data)
+                let decodedErrorPayload = try decoder.decode(TErrorPayload.self, from: data)
                 completion(.failure(.errorPayloadReturned(decodedErrorPayload, httpURLResponse)))
             } catch {
                 completion(.failure(.unexpected(.failedToDecodeErrorPayload(data,
                                                                             httpURLResponse,
-                                                                            underlyingError: IgnoredEquatable(error)))))
+                                                                            underlyingError: error))))
             }
         case .networkDataServiceError,
              .unexpectedResponseType:

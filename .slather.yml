@@ -3,7 +3,6 @@ scheme: Shared-Debug
 source_directory: Shared
 output_directory: Slather/Output
 ignore:
-  - Carthage/*
   - Shared/ErrorHandling/AssertionHandler.swift
   - Shared/Extensions/MapKit/*
   - Shared/Extensions/UIKit/*

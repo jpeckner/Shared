@@ -120,7 +120,7 @@ class HTTPServiceTests: QuickSpec {
 
                 let stubNetworkServiceError = NetworkDataServiceError.unexpectedResponseArgs(nil,
                                                                                              nil,
-                                                                                             IgnoredEquatable(nil))
+                                                                                             nil)
 
                 beforeEach {
                     mockNetworkDataService.performDataTaskCompletionClosure = { _, completion in
