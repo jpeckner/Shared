@@ -34,14 +34,6 @@ public extension UIColor {
         }
     }
 
-    static func systemGray(alternative: UIColor) -> UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGray
-        } else {
-            return alternative
-        }
-    }
-
     static func systemGray3(alternative: UIColor) -> UIColor {
         if #available(iOS 13.0, *) {
             return .systemGray3
