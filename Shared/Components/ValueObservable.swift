@@ -12,7 +12,7 @@ import Foundation
 public class ValueObservable<TValue>: ObservableObject {
     @Published public var value: TValue
 
-    public init(value: TValue) {
+    public init(_ value: TValue) {
         self._value = Published(initialValue: value)
     }
 }
