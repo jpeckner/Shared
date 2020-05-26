@@ -1,5 +1,5 @@
 //
-//  StyledLabelSUI.swift
+//  StyledText.swift
 //  Shared
 //
 //  Created by Justin Peckner.
@@ -9,7 +9,7 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-public struct StyledLabelSUI: View {
+public struct StyledText: View {
     @State public var text: String
     @State public var font: Font
     @State public var alignment: TextAlignment
