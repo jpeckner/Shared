@@ -1,6 +1,5 @@
-// Generated using Sourcery 0.17.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 1.2.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
-
 
 
 
@@ -87,7 +86,9 @@ open class HTTPServiceProtocolMock: HTTPServiceProtocol {
     open var performHTTPRequestSuccessStatusCodesCompletionReceivedArguments: (urlRequest: URLRequest, successStatusCodes: Set<Int>, completion: HTTPServiceCompletion)?
     open var performHTTPRequestSuccessStatusCodesCompletionClosure: ((URLRequest, Set<Int>, @escaping HTTPServiceCompletion) -> Void)?
 
-    open func performHTTPRequest(_ urlRequest: URLRequest,                            successStatusCodes: Set<Int>,                            completion: @escaping HTTPServiceCompletion) {
+    open func performHTTPRequest(_ urlRequest: URLRequest,
+                            successStatusCodes: Set<Int>,
+                            completion: @escaping HTTPServiceCompletion) {
         performHTTPRequestSuccessStatusCodesCompletionCallsCount += 1
         performHTTPRequestSuccessStatusCodesCompletionReceivedArguments = (urlRequest: urlRequest, successStatusCodes: successStatusCodes, completion: completion)
         performHTTPRequestSuccessStatusCodesCompletionClosure?(urlRequest, successStatusCodes, completion)
@@ -108,7 +109,8 @@ open class LocationDelegateHandlerProtocolMock: LocationDelegateHandlerProtocol 
     open var resultForDidUpdateLocationsDateManagerInitializedReturnValue: LocationRequestResult?
     open var resultForDidUpdateLocationsDateManagerInitializedClosure: (([CLLocationProtocol], Date) -> LocationRequestResult?)?
 
-    open func resultForDidUpdateLocations(_ locations: [CLLocationProtocol],                                     dateManagerInitialized: Date) -> LocationRequestResult? {
+    open func resultForDidUpdateLocations(_ locations: [CLLocationProtocol],
+                                     dateManagerInitialized: Date) -> LocationRequestResult? {
         resultForDidUpdateLocationsDateManagerInitializedCallsCount += 1
         resultForDidUpdateLocationsDateManagerInitializedReceivedArguments = (locations: locations, dateManagerInitialized: dateManagerInitialized)
         return resultForDidUpdateLocationsDateManagerInitializedClosure.map({ $0(locations, dateManagerInitialized) }) ?? resultForDidUpdateLocationsDateManagerInitializedReturnValue
@@ -164,7 +166,8 @@ open class NetworkDataServiceProtocolMock: NetworkDataServiceProtocol {
     open var performDataTaskCompletionReceivedArguments: (urlRequest: URLRequest, completion: NetworkDataServiceCompletion)?
     open var performDataTaskCompletionClosure: ((URLRequest, @escaping NetworkDataServiceCompletion) -> Void)?
 
-    open func performDataTask(_ urlRequest: URLRequest,                         completion: @escaping NetworkDataServiceCompletion) {
+    open func performDataTask(_ urlRequest: URLRequest,
+                         completion: @escaping NetworkDataServiceCompletion) {
         performDataTaskCompletionCallsCount += 1
         performDataTaskCompletionReceivedArguments = (urlRequest: urlRequest, completion: completion)
         performDataTaskCompletionClosure?(urlRequest, completion)
@@ -260,7 +263,8 @@ open class URLSessionProtocolMock<TSessionDataTask: URLSessionDataTaskProtocol>:
     open var dataTaskWithCompletionHandlerReturnValue: TSessionDataTask!
     open var dataTaskWithCompletionHandlerClosure: ((URLRequest, @escaping (Data?, URLResponse?, Error?) -> Void) -> TSessionDataTask)?
 
-    open func dataTask(with request: URLRequest,                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> TSessionDataTask {
+    open func dataTask(with request: URLRequest,
+                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> TSessionDataTask {
         dataTaskWithCompletionHandlerCallsCount += 1
         dataTaskWithCompletionHandlerReceivedArguments = (request: request, completionHandler: completionHandler)
         return dataTaskWithCompletionHandlerClosure.map({ $0(request, completionHandler) }) ?? dataTaskWithCompletionHandlerReturnValue

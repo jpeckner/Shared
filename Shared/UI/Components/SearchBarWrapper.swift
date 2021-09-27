@@ -37,7 +37,7 @@ public class SearchBarWrapper: NSObject {
 
     public weak var delegate: SearchBarWrapperDelegate?
 
-    public var isFirstResponder: Bool = false {
+    public var isFirstResponder = false {
         didSet {
             if isFirstResponder {
                 if !searchBar.isFirstResponder {
