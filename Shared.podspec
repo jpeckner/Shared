@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Shared'
-  s.version = '1.1.5'
+  s.version = '1.1.6'
   s.summary = 'Swift iOS framework containing code for networking, location services, UI, and more.'
   s.homepage = 'https://github.com/jpeckner/Shared'
   s.authors = { 'Justin Peckner' => 'pecknerj@gmail.com' }

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'SharedTestComponents'
   s.module_name = 'SharedTestComponents'
-  s.version = '1.1.5'
+  s.version = '1.1.6'
   s.summary = 'Test components for Shared framework.'
   s.homepage = 'https://github.com/jpeckner/Shared'
   s.authors = { 'Justin Peckner' => 'pecknerj@gmail.com' }
