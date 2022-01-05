@@ -14,7 +14,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
   s.source_files = 'SharedTestComponents/**/*.swift'
   s.swift_version = '5.1'
-  s.resources = ['SharedTestComponents/Sourcery/Templates/*']
+  s.resources = [
+    'SharedTestComponents/Sourcery/Templates/*'
+  ]
 
   s.dependency 'Shared', '' + s.version.to_s
 end

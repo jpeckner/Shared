@@ -13,5 +13,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '12.0'
   s.source_files = 'Shared/**/*.swift'
   s.swift_version = '5.1'
+  s.resources = [
+    'Shared/Sourcery/Templates/*'
+  ]
   s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-weak_framework SwiftUI' }
 end
