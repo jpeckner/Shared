@@ -819,7 +819,6 @@
 			buildConfigurationList = 2117CF03C79C03B7B3B8416A647B751E /* Build configuration list for PBXNativeTarget "Shared" */;
 			buildPhases = (
 				F612077A3F95A743DAB54300AF437F85 /* Headers */,
-				CA23235F23DFD1EF00566E07 /* Sourcery */,
 				AD74B58C499707A60EFE16AECBB88ECC /* Sources */,
 			);
 			buildRules = (
@@ -880,27 +879,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		CA23235F23DFD1EF00566E07 /* Sourcery */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Sourcery;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "BuildScripts/run_sourcery.sh\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F95F6796BB4FB601C55D6FF861C18F6 /* Sources */ = {
