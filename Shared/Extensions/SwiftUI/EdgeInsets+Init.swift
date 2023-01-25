@@ -1,8 +1,8 @@
 //
-//  StyledLabelSUI.swift
+//  EdgeInsets+Init.swift
 //  Shared
 //
-//  Copyright (c) 2019 Justin Peckner
+//  Copyright (c) 2020 Justin Peckner
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,30 +25,13 @@
 import SwiftUI
 
 @available(iOS 13.0, *)
-public struct StyledLabelSUI: View {
-    @State public var text: String
-    @State public var font: Font
-    @State public var alignment: TextAlignment
-    @State public var textColoring: TextColoring
-    @State public var numberOfLines: Int?
+public extension EdgeInsets {
 
-    public init(text: String,
-                font: Font,
-                alignment: TextAlignment,
-                textColoring: TextColoring,
-                numberOfLines: Int? = nil) {
-        self._text = State(initialValue: text)
-        self._font = State(initialValue: font)
-        self._alignment = State(initialValue: alignment)
-        self._textColoring = State(initialValue: textColoring)
-        self._numberOfLines = State(initialValue: numberOfLines)
+    init(uniformInset: CGFloat) {
+        self.init(top: uniformInset,
+                  leading: uniformInset,
+                  bottom: uniformInset,
+                  trailing: uniformInset)
     }
 
-    public var body: some View {
-        Text(text)
-            .font(font)
-            .multilineTextAlignment(alignment)
-            .foregroundColor(Color(textColoring.textColor))
-            .lineLimit(numberOfLines)
-    }
 }

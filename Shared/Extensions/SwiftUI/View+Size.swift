@@ -1,5 +1,5 @@
 //
-//  ValueObservable.swift
+//  View+Size.swift
 //  Shared
 //
 //  Copyright (c) 2020 Justin Peckner
@@ -22,13 +22,33 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Foundation
+import SwiftUI
 
 @available(iOS 13.0, *)
-public class ValueObservable<TValue>: ObservableObject {
-    @Published public var value: TValue
+public extension View {
 
-    public init(_ value: TValue) {
-        self._value = Published(initialValue: value)
+    func frame(width: CGFloat,
+               widthToHeightRatio: CGFloat) -> some View {
+        let height = width / widthToHeightRatio
+
+        return
+            frame(idealWidth: width,
+                  maxWidth: width,
+                  idealHeight: height,
+                  maxHeight: height)
+            .fixedSize()
     }
+
+    func frame(height: CGFloat,
+               widthToHeightRatio: CGFloat) -> some View {
+        let width = height * widthToHeightRatio
+
+        return
+            frame(idealWidth: width,
+                  maxWidth: width,
+                  idealHeight: height,
+                  maxHeight: height)
+            .fixedSize()
+    }
+
 }

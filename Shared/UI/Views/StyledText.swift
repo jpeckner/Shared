@@ -1,8 +1,8 @@
 //
-//  ValueObservable.swift
+//  StyledText.swift
 //  Shared
 //
-//  Copyright (c) 2020 Justin Peckner
+//  Copyright (c) 2019 Justin Peckner
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,29 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-import Foundation
+import SwiftUI
 
 @available(iOS 13.0, *)
-public class ValueObservable<TValue>: ObservableObject {
-    @Published public var value: TValue
+public struct StyledText: View {
+    @State public var text: String
+    @State public var font: Font
+    @State public var alignment: TextAlignment
+    @State public var textColoring: TextColoring
 
-    public init(_ value: TValue) {
-        self._value = Published(initialValue: value)
+    public init(text: String,
+                font: Font,
+                alignment: TextAlignment,
+                textColoring: TextColoring) {
+        self._text = State(initialValue: text)
+        self._font = State(initialValue: font)
+        self._alignment = State(initialValue: alignment)
+        self._textColoring = State(initialValue: textColoring)
+    }
+
+    public var body: some View {
+        Text(text)
+            .font(font)
+            .multilineTextAlignment(alignment)
+            .foregroundColor(Color(textColoring.textColor))
     }
 }

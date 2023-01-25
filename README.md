@@ -4,15 +4,11 @@ Shared is a Swift iOS framework containing code for networking, location service
 
 # Installation
 
-### Prerequisites
-
-To use Shared, make sure you've first installed [Sourcery](https://github.com/krzysztofzablocki/Sourcery#installation).
-
 ### CocoaPods
 
 Add the following to your Podfile, then run `pod install`:
 
-`pod 'Shared', :git => 'https://github.com/jpeckner/Shared.git'`
+`pod 'Shared', :git => 'https://github.com/jpeckner/Shared.git', :branch => 'master'`
 
 ### Carthage
 
