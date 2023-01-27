@@ -47,7 +47,6 @@ extension TextColoring: Decodable {
 
 }
 
-@available(iOS 13.0, *)
 public extension TextColoring {
 
     var color: Color {

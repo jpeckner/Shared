@@ -24,7 +24,6 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
 public struct StyledText: View {
     @State public var text: String
     @State public var font: Font
