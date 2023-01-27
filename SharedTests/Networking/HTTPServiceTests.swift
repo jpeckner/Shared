@@ -38,14 +38,14 @@ class HTTPServiceTests: QuickSpec {
         let dummyURLRequest = URLRequest.stubValue()
         let stubURLResponse = HTTPURLResponse.stubValue()
 
-        var mockNetworkDataService: NetworkDataServiceProtocolMock!
+        var mockURLSession: URLSessionProtocolMock!
         var httpService: HTTPService!
 
         var returnedResult: HTTPServiceResult!
 
         beforeEach {
-            mockNetworkDataService = NetworkDataServiceProtocolMock()
-            httpService = HTTPService(networkDataService: mockNetworkDataService)
+            mockURLSession = URLSessionProtocolMock()
+            httpService = HTTPService(urlSession: mockURLSession)
         }
 
         describe("performHTTPRequest") {
@@ -56,18 +56,21 @@ class HTTPServiceTests: QuickSpec {
 
                     let nonHTTPResponse = URLResponse()
 
-                    beforeEach {
-                        mockNetworkDataService.performDataTaskCompletionClosure = { _, completion in
-                            completion(.success(.withData(stubData, nonHTTPResponse)))
-                        }
+                    beforeEach { _ in
+                        mockURLSession.dataForReturnValue = (stubData, nonHTTPResponse)
 
-                        httpService.performHTTPRequest(dummyURLRequest, successStatusCodes: [200]) { result in
-                            returnedResult = result
-                        }
+                        returnedResult = await httpService.performHTTPRequest(urlRequest: dummyURLRequest,
+                                                                              successStatusCodes: [200])
                     }
 
                     it("passes back .failure(.unexpectedResponseType)") {
-                        expect(returnedResult) == .failure(.unexpectedResponseType(stubData, nonHTTPResponse))
+                        guard case let .failure(.unexpectedResponseType(data, httpResponse)) = returnedResult else {
+                            fail("Unexpected value found: \(String(describing: returnedResult))")
+                            return
+                        }
+
+                        expect(data) == stubData
+                        expect(httpResponse) == nonHTTPResponse
                     }
 
                 }
@@ -76,83 +79,66 @@ class HTTPServiceTests: QuickSpec {
 
                     let errorURLResponse = HTTPURLResponse.stubValue(statusCode: 400)
 
-                    beforeEach {
-                        mockNetworkDataService.performDataTaskCompletionClosure = { _, completion in
-                            completion(.success(.withData(stubData, errorURLResponse)))
-                        }
+                    beforeEach { _ in
+                        mockURLSession.dataForReturnValue = (stubData, errorURLResponse)
 
-                        httpService.performHTTPRequest(dummyURLRequest, successStatusCodes: [200]) { result in
-                            returnedResult = result
-                        }
+                        returnedResult = await httpService.performHTTPRequest(urlRequest: dummyURLRequest,
+                                                                              successStatusCodes: [200])
                     }
 
                     it("passes back .failure(.nonSuccessfulStatusCode)") {
-                        expect(returnedResult) == .failure(.nonSuccessfulStatusCode(stubData, errorURLResponse))
+                        guard case let .failure(.nonSuccessfulStatusCode(data, httpResponse)) = returnedResult else {
+                            fail("Unexpected value found: \(String(describing: returnedResult))")
+                            return
+                        }
+
+                        expect(data) == stubData
+                        expect(httpResponse) == errorURLResponse
                     }
 
                 }
 
                 context("and that result holds non-nil Data") {
 
-                    beforeEach {
-                        mockNetworkDataService.performDataTaskCompletionClosure = { _, completion in
-                            completion(.success(.withData(stubData, stubURLResponse)))
-                        }
+                    beforeEach { _ in
+                        mockURLSession.dataForReturnValue = (stubData, stubURLResponse)
 
-                        httpService.performHTTPRequest(dummyURLRequest,
-                                                       successStatusCodes: [200]) { result in
-                            returnedResult = result
-                        }
+                        returnedResult = await httpService.performHTTPRequest(urlRequest: dummyURLRequest,
+                                                                              successStatusCodes: [200])
                     }
 
                     it("passes back .success(.withHTTPData)") {
-                        expect(returnedResult) == .success(.withHTTPData(stubData, stubURLResponse))
-                    }
-
-                }
-
-                context("and that result holds nil Data") {
-
-                    beforeEach {
-                        mockNetworkDataService.performDataTaskCompletionClosure = { _, completion in
-                            completion(.success(.sansData(stubURLResponse)))
+                        guard case let .success(success) = returnedResult else {
+                            fail("Unexpected value found: \(String(describing: returnedResult))")
+                            return
                         }
 
-                        httpService.performHTTPRequest(dummyURLRequest,
-                                                       successStatusCodes: [200]) { result in
-                            returnedResult = result
-                        }
-                    }
-
-                    it("passes back .success(.sansHTTPData)") {
-                        expect(returnedResult) == .success(.sansHTTPData(stubURLResponse))
+                        expect(success.data) == stubData
+                        expect(success.response) == stubURLResponse
                     }
 
                 }
 
             }
 
-            context("else when the NetworkDataService passes back a .failure result") {
+            context("else when the NetworkDataService throws a .failure result") {
+                let stubNetworkServiceError = StubError.plainError
 
-                let stubNetworkServiceError = NetworkDataServiceError.unexpectedResponseArgs(nil,
-                                                                                             nil,
-                                                                                             nil)
+                beforeEach { _ in
+                    mockURLSession.dataForThrowableError = stubNetworkServiceError
 
-                beforeEach {
-                    mockNetworkDataService.performDataTaskCompletionClosure = { _, completion in
-                        completion(.failure(stubNetworkServiceError))
-                    }
-
-                    httpService.performHTTPRequest(dummyURLRequest,
-                                                   successStatusCodes: [200]) { result in
-                        returnedResult = result
-                    }
+                    returnedResult = await httpService.performHTTPRequest(urlRequest: dummyURLRequest,
+                                                                          successStatusCodes: [200])
                 }
 
                 it("passes back .failure(.networkDataServiceError)") {
-                    expect(returnedResult) == .failure(.networkDataServiceError(stubNetworkServiceError))
-                }
+                    guard case let .failure(.networkDataServiceError(error)) = returnedResult else {
+                        fail("Unexpected value found: \(String(describing: returnedResult))")
+                        return
+                    }
 
+                    expect(error.value as? StubError) == stubNetworkServiceError
+                }
             }
 
         }

@@ -33,7 +33,7 @@ public enum DecodableServiceError<TErrorPayload: Decodable>: Error {
 }
 
 public enum DecodableServiceUnexpectedError: Error {
-    case httpServiceError(underlyingError: HTTPServiceError)
+    case httpServiceError(underlyingError: Error)
     case noDataReturned(URLResponse)
     case failedToDecodeObject(Data, HTTPURLResponse, underlyingError: Error)
     case failedToDecodeErrorPayload(Data, HTTPURLResponse, underlyingError: Error)
@@ -44,16 +44,10 @@ public typealias DecodableServiceResult<
     TErrorPayload: Decodable
 > = Result<TEntity, DecodableServiceError<TErrorPayload>>
 
-public typealias DecodableServiceCompletion<
-    TEntity: Decodable,
-    TErrorPayload: Decodable
-> = (DecodableServiceResult<TEntity, TErrorPayload>) -> Void
-
 public protocol DecodableServiceProtocol {
     func performRequest<TEntity: Decodable, TErrorPayload: Decodable>(
-        _ urlRequest: URLRequest,
-        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
-    )
+        urlRequest: URLRequest
+    ) async -> DecodableServiceResult<TEntity, TErrorPayload>
 }
 
 public class DecodableService: DecodableServiceProtocol {
@@ -68,60 +62,52 @@ public class DecodableService: DecodableServiceProtocol {
     }
 
     public func performRequest<TEntity: Decodable, TErrorPayload: Decodable>(
-        _ urlRequest: URLRequest,
-        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
-    ) {
-        httpService.performHTTPRequest(urlRequest, successStatusCodes: [200]) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.handleHTTPResponse(response, completion: completion)
-            case .failure(let error):
-                self?.handleHTTPError(error, completion: completion)
-            }
+        urlRequest: URLRequest
+    ) async -> DecodableServiceResult<TEntity, TErrorPayload> {
+        let httpResult = await httpService.performHTTPRequest(urlRequest: urlRequest,
+                                                              successStatusCodes: [200])
+
+        switch httpResult {
+        case let .success(success):
+            return handleHTTPResponse(data: success.data,
+                                      response: success.response)
+
+        case let .failure(error):
+            return handleHTTPError(error: error)
         }
     }
 
     private func handleHTTPResponse<TEntity: Decodable, TErrorPayload: Decodable>(
-        _ response: HTTPServiceResponse,
-        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
-    ) {
-        switch response {
-        case let .withHTTPData(data, httpURLResponse):
-            do {
-                let decodedObject = try decoder.decode(TEntity.self, from: data)
-                completion(.success(decodedObject))
-            } catch {
-                completion(.failure(.unexpected(.failedToDecodeObject(data,
-                                                                      httpURLResponse,
-                                                                      underlyingError: error))))
-            }
-        case .sansHTTPData(let urlResponse):
-            completion(.failure(.unexpected(.noDataReturned(urlResponse))))
+        data: Data,
+        response: HTTPURLResponse
+    ) -> DecodableServiceResult<TEntity, TErrorPayload> {
+        do {
+            let decodedObject = try decoder.decode(TEntity.self, from: data)
+            return .success(decodedObject)
+        } catch {
+            return .failure(.unexpected(.failedToDecodeObject(data,
+                                                              response,
+                                                              underlyingError: error)))
         }
     }
 
     private func handleHTTPError<TEntity: Decodable, TErrorPayload: Decodable>(
-        _ error: HTTPServiceError,
-        completion: @escaping DecodableServiceCompletion<TEntity, TErrorPayload>
-    ) {
+        error: HTTPServiceError
+    ) -> DecodableServiceResult<TEntity, TErrorPayload> {
         switch error {
         case let .nonSuccessfulStatusCode(data, httpURLResponse):
-            guard let data = data else {
-                completion(.failure(.unexpected(.httpServiceError(underlyingError: error))))
-                return
-            }
-
             do {
                 let decodedErrorPayload = try decoder.decode(TErrorPayload.self, from: data)
-                completion(.failure(.errorPayloadReturned(decodedErrorPayload, httpURLResponse)))
+                return .failure(.errorPayloadReturned(decodedErrorPayload, httpURLResponse))
             } catch {
-                completion(.failure(.unexpected(.failedToDecodeErrorPayload(data,
-                                                                            httpURLResponse,
-                                                                            underlyingError: error))))
+                return .failure(.unexpected(.failedToDecodeErrorPayload(data,
+                                                                        httpURLResponse,
+                                                                        underlyingError: error)))
             }
+
         case .networkDataServiceError,
              .unexpectedResponseType:
-            completion(.failure(.unexpected(.httpServiceError(underlyingError: error))))
+            return .failure(.unexpected(.httpServiceError(underlyingError: error)))
         }
     }
 

@@ -1,273 +1,298 @@
-// Generated using Sourcery 1.2.1 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 1.9.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
+// swiftlint:disable line_length
+// swiftlint:disable variable_name
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import Foundation
+#if os(iOS) || os(tvOS) || os(watchOS)
+import UIKit
+#elseif os(OSX)
+import AppKit
+#endif
 
 import CoreLocation
-import Foundation
 import Shared
 
-open class CLLocationManagerAuthProtocolMock: CLLocationManagerAuthProtocol {
-    open var delegate: CLLocationManagerDelegate?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class CLLocationManagerAuthProtocolMock: CLLocationManagerAuthProtocol {
 
     public init() {}
 
-    // MARK: - requestWhenInUseAuthorization
+    public var delegate: CLLocationManagerDelegate?
 
-    open var requestWhenInUseAuthorizationCallsCount = 0
-    open var requestWhenInUseAuthorizationCalled: Bool {
+    //MARK: - requestWhenInUseAuthorization
+
+    public var requestWhenInUseAuthorizationCallsCount = 0
+    public var requestWhenInUseAuthorizationCalled: Bool {
         return requestWhenInUseAuthorizationCallsCount > 0
     }
-    open var requestWhenInUseAuthorizationClosure: (() -> Void)?
+    public var requestWhenInUseAuthorizationClosure: (() -> Void)?
 
-    open func requestWhenInUseAuthorization() {
+    public func requestWhenInUseAuthorization() {
         requestWhenInUseAuthorizationCallsCount += 1
         requestWhenInUseAuthorizationClosure?()
     }
 
 }
-open class CLLocationManagerRequestProtocolMock: CLLocationManagerRequestProtocol {
-    open var delegate: CLLocationManagerDelegate?
+public class CLLocationManagerRequestProtocolMock: CLLocationManagerRequestProtocol {
 
     public init() {}
 
-    // MARK: - startUpdatingLocation
+    public var delegate: CLLocationManagerDelegate?
 
-    open var startUpdatingLocationCallsCount = 0
-    open var startUpdatingLocationCalled: Bool {
+    //MARK: - startUpdatingLocation
+
+    public var startUpdatingLocationCallsCount = 0
+    public var startUpdatingLocationCalled: Bool {
         return startUpdatingLocationCallsCount > 0
     }
-    open var startUpdatingLocationClosure: (() -> Void)?
+    public var startUpdatingLocationClosure: (() -> Void)?
 
-    open func startUpdatingLocation() {
+    public func startUpdatingLocation() {
         startUpdatingLocationCallsCount += 1
         startUpdatingLocationClosure?()
     }
 
-    // MARK: - stopUpdatingLocation
+    //MARK: - stopUpdatingLocation
 
-    open var stopUpdatingLocationCallsCount = 0
-    open var stopUpdatingLocationCalled: Bool {
+    public var stopUpdatingLocationCallsCount = 0
+    public var stopUpdatingLocationCalled: Bool {
         return stopUpdatingLocationCallsCount > 0
     }
-    open var stopUpdatingLocationClosure: (() -> Void)?
+    public var stopUpdatingLocationClosure: (() -> Void)?
 
-    open func stopUpdatingLocation() {
+    public func stopUpdatingLocation() {
         stopUpdatingLocationCallsCount += 1
         stopUpdatingLocationClosure?()
     }
 
 }
-open class HTTPServiceProtocolMock: HTTPServiceProtocol {
+public class HTTPServiceProtocolMock: HTTPServiceProtocol {
 
     public init() {}
 
-    // MARK: - performHTTPRequest
 
-    open var performHTTPRequestSuccessStatusCodesCompletionCallsCount = 0
-    open var performHTTPRequestSuccessStatusCodesCompletionCalled: Bool {
-        return performHTTPRequestSuccessStatusCodesCompletionCallsCount > 0
+    //MARK: - performHTTPRequest
+
+    public var performHTTPRequestUrlRequestSuccessStatusCodesCallsCount = 0
+    public var performHTTPRequestUrlRequestSuccessStatusCodesCalled: Bool {
+        return performHTTPRequestUrlRequestSuccessStatusCodesCallsCount > 0
     }
-    open var performHTTPRequestSuccessStatusCodesCompletionReceivedArguments: (urlRequest: URLRequest, successStatusCodes: Set<Int>, completion: HTTPServiceCompletion)?
-    open var performHTTPRequestSuccessStatusCodesCompletionClosure: ((URLRequest, Set<Int>, @escaping HTTPServiceCompletion) -> Void)?
+    public var performHTTPRequestUrlRequestSuccessStatusCodesReceivedArguments: (urlRequest: URLRequest, successStatusCodes: Set<Int>)?
+    public var performHTTPRequestUrlRequestSuccessStatusCodesReceivedInvocations: [(urlRequest: URLRequest, successStatusCodes: Set<Int>)] = []
+    public var performHTTPRequestUrlRequestSuccessStatusCodesReturnValue: HTTPServiceResult!
+    public var performHTTPRequestUrlRequestSuccessStatusCodesClosure: ((URLRequest, Set<Int>) async -> HTTPServiceResult)?
 
-    open func performHTTPRequest(_ urlRequest: URLRequest,
-                            successStatusCodes: Set<Int>,
-                            completion: @escaping HTTPServiceCompletion) {
-        performHTTPRequestSuccessStatusCodesCompletionCallsCount += 1
-        performHTTPRequestSuccessStatusCodesCompletionReceivedArguments = (urlRequest: urlRequest, successStatusCodes: successStatusCodes, completion: completion)
-        performHTTPRequestSuccessStatusCodesCompletionClosure?(urlRequest, successStatusCodes, completion)
+    public func performHTTPRequest(urlRequest: URLRequest, successStatusCodes: Set<Int>) async -> HTTPServiceResult {
+        performHTTPRequestUrlRequestSuccessStatusCodesCallsCount += 1
+        performHTTPRequestUrlRequestSuccessStatusCodesReceivedArguments = (urlRequest: urlRequest, successStatusCodes: successStatusCodes)
+        performHTTPRequestUrlRequestSuccessStatusCodesReceivedInvocations.append((urlRequest: urlRequest, successStatusCodes: successStatusCodes))
+        if let performHTTPRequestUrlRequestSuccessStatusCodesClosure = performHTTPRequestUrlRequestSuccessStatusCodesClosure {
+            return await performHTTPRequestUrlRequestSuccessStatusCodesClosure(urlRequest, successStatusCodes)
+        } else {
+            return performHTTPRequestUrlRequestSuccessStatusCodesReturnValue
+        }
     }
 
 }
-open class LocationDelegateHandlerProtocolMock: LocationDelegateHandlerProtocol {
+public class LocationDelegateHandlerProtocolMock: LocationDelegateHandlerProtocol {
 
     public init() {}
 
-    // MARK: - resultForDidUpdateLocations
 
-    open var resultForDidUpdateLocationsDateManagerInitializedCallsCount = 0
-    open var resultForDidUpdateLocationsDateManagerInitializedCalled: Bool {
+    //MARK: - resultForDidUpdateLocations
+
+    public var resultForDidUpdateLocationsDateManagerInitializedCallsCount = 0
+    public var resultForDidUpdateLocationsDateManagerInitializedCalled: Bool {
         return resultForDidUpdateLocationsDateManagerInitializedCallsCount > 0
     }
-    open var resultForDidUpdateLocationsDateManagerInitializedReceivedArguments: (locations: [CLLocationProtocol], dateManagerInitialized: Date)?
-    open var resultForDidUpdateLocationsDateManagerInitializedReturnValue: LocationRequestResult?
-    open var resultForDidUpdateLocationsDateManagerInitializedClosure: (([CLLocationProtocol], Date) -> LocationRequestResult?)?
+    public var resultForDidUpdateLocationsDateManagerInitializedReceivedArguments: (locations: [CLLocationProtocol], dateManagerInitialized: Date)?
+    public var resultForDidUpdateLocationsDateManagerInitializedReceivedInvocations: [(locations: [CLLocationProtocol], dateManagerInitialized: Date)] = []
+    public var resultForDidUpdateLocationsDateManagerInitializedReturnValue: LocationRequestResult?
+    public var resultForDidUpdateLocationsDateManagerInitializedClosure: (([CLLocationProtocol], Date) -> LocationRequestResult?)?
 
-    open func resultForDidUpdateLocations(_ locations: [CLLocationProtocol],
-                                     dateManagerInitialized: Date) -> LocationRequestResult? {
+    public func resultForDidUpdateLocations(_ locations: [CLLocationProtocol], dateManagerInitialized: Date) -> LocationRequestResult? {
         resultForDidUpdateLocationsDateManagerInitializedCallsCount += 1
         resultForDidUpdateLocationsDateManagerInitializedReceivedArguments = (locations: locations, dateManagerInitialized: dateManagerInitialized)
-        return resultForDidUpdateLocationsDateManagerInitializedClosure.map({ $0(locations, dateManagerInitialized) }) ?? resultForDidUpdateLocationsDateManagerInitializedReturnValue
+        resultForDidUpdateLocationsDateManagerInitializedReceivedInvocations.append((locations: locations, dateManagerInitialized: dateManagerInitialized))
+        if let resultForDidUpdateLocationsDateManagerInitializedClosure = resultForDidUpdateLocationsDateManagerInitializedClosure {
+            return resultForDidUpdateLocationsDateManagerInitializedClosure(locations, dateManagerInitialized)
+        } else {
+            return resultForDidUpdateLocationsDateManagerInitializedReturnValue
+        }
     }
 
-    // MARK: - resultForDidFailWithError
+    //MARK: - resultForDidFailWithError
 
-    open var resultForDidFailWithErrorCallsCount = 0
-    open var resultForDidFailWithErrorCalled: Bool {
+    public var resultForDidFailWithErrorCallsCount = 0
+    public var resultForDidFailWithErrorCalled: Bool {
         return resultForDidFailWithErrorCallsCount > 0
     }
-    open var resultForDidFailWithErrorReceivedError: Error?
-    open var resultForDidFailWithErrorReturnValue: LocationRequestResult?
-    open var resultForDidFailWithErrorClosure: ((Error) -> LocationRequestResult?)?
+    public var resultForDidFailWithErrorReceivedError: Error?
+    public var resultForDidFailWithErrorReceivedInvocations: [Error] = []
+    public var resultForDidFailWithErrorReturnValue: LocationRequestResult?
+    public var resultForDidFailWithErrorClosure: ((Error) -> LocationRequestResult?)?
 
-    open func resultForDidFailWithError(_ error: Error) -> LocationRequestResult? {
+    public func resultForDidFailWithError(_ error: Error) -> LocationRequestResult? {
         resultForDidFailWithErrorCallsCount += 1
         resultForDidFailWithErrorReceivedError = error
-        return resultForDidFailWithErrorClosure.map({ $0(error) }) ?? resultForDidFailWithErrorReturnValue
+        resultForDidFailWithErrorReceivedInvocations.append(error)
+        if let resultForDidFailWithErrorClosure = resultForDidFailWithErrorClosure {
+            return resultForDidFailWithErrorClosure(error)
+        } else {
+            return resultForDidFailWithErrorReturnValue
+        }
     }
 
 }
-open class LocationRequestHandlerProtocolMock: LocationRequestHandlerProtocol {
+public class LocationRequestHandlerProtocolMock: LocationRequestHandlerProtocol {
 
     public init() {}
 
-    // MARK: - requestLocation
 
-    open var requestLocationCallsCount = 0
-    open var requestLocationCalled: Bool {
+    //MARK: - requestLocation
+
+    public var requestLocationCallsCount = 0
+    public var requestLocationCalled: Bool {
         return requestLocationCallsCount > 0
     }
-    open var requestLocationReceivedCallback: ((LocationRequestResult) -> Void)?
-    open var requestLocationClosure: ((@escaping (LocationRequestResult) -> Void) -> Void)?
+    public var requestLocationReceivedCallback: ((LocationRequestResult) -> Void)?
+    public var requestLocationReceivedInvocations: [((LocationRequestResult) -> Void)] = []
+    public var requestLocationClosure: ((@escaping (LocationRequestResult) -> Void) -> Void)?
 
-    open func requestLocation(_ callback: @escaping (LocationRequestResult) -> Void) {
+    public func requestLocation(_ callback: @escaping (LocationRequestResult) -> Void) {
         requestLocationCallsCount += 1
         requestLocationReceivedCallback = callback
+        requestLocationReceivedInvocations.append(callback)
         requestLocationClosure?(callback)
     }
 
 }
-open class NetworkDataServiceProtocolMock: NetworkDataServiceProtocol {
+public class ResettableAutoMockableMock: ResettableAutoMockable {
 
     public init() {}
 
-    // MARK: - performDataTask
-
-    open var performDataTaskCompletionCallsCount = 0
-    open var performDataTaskCompletionCalled: Bool {
-        return performDataTaskCompletionCallsCount > 0
-    }
-    open var performDataTaskCompletionReceivedArguments: (urlRequest: URLRequest, completion: NetworkDataServiceCompletion)?
-    open var performDataTaskCompletionClosure: ((URLRequest, @escaping NetworkDataServiceCompletion) -> Void)?
-
-    open func performDataTask(_ urlRequest: URLRequest,
-                         completion: @escaping NetworkDataServiceCompletion) {
-        performDataTaskCompletionCallsCount += 1
-        performDataTaskCompletionReceivedArguments = (urlRequest: urlRequest, completion: completion)
-        performDataTaskCompletionClosure?(urlRequest, completion)
-    }
 
 }
-open class UIWindowProtocolMock: UIWindowProtocol {
-    open var rootViewController: UIViewController?
+public class UIWindowProtocolMock: UIWindowProtocol {
 
     public init() {}
 
-    // MARK: - makeKeyAndVisible
+    public var rootViewController: UIViewController?
 
-    open var makeKeyAndVisibleCallsCount = 0
-    open var makeKeyAndVisibleCalled: Bool {
+    //MARK: - makeKeyAndVisible
+
+    public var makeKeyAndVisibleCallsCount = 0
+    public var makeKeyAndVisibleCalled: Bool {
         return makeKeyAndVisibleCallsCount > 0
     }
-    open var makeKeyAndVisibleClosure: (() -> Void)?
+    public var makeKeyAndVisibleClosure: (() -> Void)?
 
-    open func makeKeyAndVisible() {
+    public func makeKeyAndVisible() {
         makeKeyAndVisibleCallsCount += 1
         makeKeyAndVisibleClosure?()
     }
 
 }
-open class URLOpenerServiceProtocolMock: URLOpenerServiceProtocol {
-    open var openSettingsBlock: OpenURLBlock?
+public class URLOpenerServiceProtocolMock: URLOpenerServiceProtocol {
 
     public init() {}
 
-    // MARK: - buildOpenURLBlock
+    public var openSettingsBlock: OpenURLBlock?
 
-    open var buildOpenURLBlockCallsCount = 0
-    open var buildOpenURLBlockCalled: Bool {
+    //MARK: - buildOpenURLBlock
+
+    public var buildOpenURLBlockCallsCount = 0
+    public var buildOpenURLBlockCalled: Bool {
         return buildOpenURLBlockCallsCount > 0
     }
-    open var buildOpenURLBlockReceivedUrl: URL?
-    open var buildOpenURLBlockReturnValue: OpenURLBlock?
-    open var buildOpenURLBlockClosure: ((URL) -> OpenURLBlock?)?
+    public var buildOpenURLBlockReceivedUrl: URL?
+    public var buildOpenURLBlockReceivedInvocations: [URL] = []
+    public var buildOpenURLBlockReturnValue: OpenURLBlock?
+    public var buildOpenURLBlockClosure: ((URL) -> OpenURLBlock?)?
 
-    open func buildOpenURLBlock(_ url: URL) -> OpenURLBlock? {
+    public func buildOpenURLBlock(_ url: URL) -> OpenURLBlock? {
         buildOpenURLBlockCallsCount += 1
         buildOpenURLBlockReceivedUrl = url
-        return buildOpenURLBlockClosure.map({ $0(url) }) ?? buildOpenURLBlockReturnValue
+        buildOpenURLBlockReceivedInvocations.append(url)
+        if let buildOpenURLBlockClosure = buildOpenURLBlockClosure {
+            return buildOpenURLBlockClosure(url)
+        } else {
+            return buildOpenURLBlockReturnValue
+        }
     }
 
-    // MARK: - buildPhoneCallBlock
+    //MARK: - buildPhoneCallBlock
 
-    open var buildPhoneCallBlockCallsCount = 0
-    open var buildPhoneCallBlockCalled: Bool {
+    public var buildPhoneCallBlockCallsCount = 0
+    public var buildPhoneCallBlockCalled: Bool {
         return buildPhoneCallBlockCallsCount > 0
     }
-    open var buildPhoneCallBlockReceivedPhoneNumber: NonEmptyString?
-    open var buildPhoneCallBlockReturnValue: OpenURLBlock?
-    open var buildPhoneCallBlockClosure: ((NonEmptyString) -> OpenURLBlock?)?
+    public var buildPhoneCallBlockReceivedPhoneNumber: NonEmptyString?
+    public var buildPhoneCallBlockReceivedInvocations: [NonEmptyString] = []
+    public var buildPhoneCallBlockReturnValue: OpenURLBlock?
+    public var buildPhoneCallBlockClosure: ((NonEmptyString) -> OpenURLBlock?)?
 
-    open func buildPhoneCallBlock(_ phoneNumber: NonEmptyString) -> OpenURLBlock? {
+    public func buildPhoneCallBlock(_ phoneNumber: NonEmptyString) -> OpenURLBlock? {
         buildPhoneCallBlockCallsCount += 1
         buildPhoneCallBlockReceivedPhoneNumber = phoneNumber
-        return buildPhoneCallBlockClosure.map({ $0(phoneNumber) }) ?? buildPhoneCallBlockReturnValue
+        buildPhoneCallBlockReceivedInvocations.append(phoneNumber)
+        if let buildPhoneCallBlockClosure = buildPhoneCallBlockClosure {
+            return buildPhoneCallBlockClosure(phoneNumber)
+        } else {
+            return buildPhoneCallBlockReturnValue
+        }
     }
 
 }
-open class URLSessionDataTaskProtocolMock: URLSessionDataTaskProtocol {
+public class URLSessionProtocolMock: URLSessionProtocol {
 
     public init() {}
 
-    // MARK: - resume
 
-    open var resumeCallsCount = 0
-    open var resumeCalled: Bool {
-        return resumeCallsCount > 0
+    //MARK: - data
+
+    public var dataForThrowableError: Error?
+    public var dataForCallsCount = 0
+    public var dataForCalled: Bool {
+        return dataForCallsCount > 0
     }
-    open var resumeClosure: (() -> Void)?
+    public var dataForReceivedRequest: URLRequest?
+    public var dataForReceivedInvocations: [URLRequest] = []
+    public var dataForReturnValue: (Data, URLResponse)!
+    public var dataForClosure: ((URLRequest) async throws -> (Data, URLResponse))?
 
-    open func resume() {
-        resumeCallsCount += 1
-        resumeClosure?()
-    }
-
-}
-open class URLSessionProtocolMock<TSessionDataTask: URLSessionDataTaskProtocol>: URLSessionProtocol {
-
-    public init() {}
-
-    // MARK: - dataTask
-
-    open var dataTaskWithCompletionHandlerCallsCount = 0
-    open var dataTaskWithCompletionHandlerCalled: Bool {
-        return dataTaskWithCompletionHandlerCallsCount > 0
-    }
-    open var dataTaskWithCompletionHandlerReceivedArguments: (request: URLRequest, completionHandler: (Data?, URLResponse?, Error?) -> Void)?
-    open var dataTaskWithCompletionHandlerReturnValue: TSessionDataTask!
-    open var dataTaskWithCompletionHandlerClosure: ((URLRequest, @escaping (Data?, URLResponse?, Error?) -> Void) -> TSessionDataTask)?
-
-    open func dataTask(with request: URLRequest,
-                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> TSessionDataTask {
-        dataTaskWithCompletionHandlerCallsCount += 1
-        dataTaskWithCompletionHandlerReceivedArguments = (request: request, completionHandler: completionHandler)
-        return dataTaskWithCompletionHandlerClosure.map({ $0(request, completionHandler) }) ?? dataTaskWithCompletionHandlerReturnValue
+    public func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        if let error = dataForThrowableError {
+            throw error
+        }
+        dataForCallsCount += 1
+        dataForReceivedRequest = request
+        dataForReceivedInvocations.append(request)
+        if let dataForClosure = dataForClosure {
+            return try await dataForClosure(request)
+        } else {
+            return dataForReturnValue
+        }
     }
 
 }
