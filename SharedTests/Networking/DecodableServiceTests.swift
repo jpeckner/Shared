@@ -59,9 +59,9 @@ class DecodableServiceTests: QuickSpec {
                 context("and that result contains a .withData instance") {
 
                     beforeEach {
-                        mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
-                            completion(.success(.withHTTPData(stubData, stubURLResponse)))
-                        }
+                        let success = HTTPServiceSuccess(data: stubData,
+                                                         response: stubURLResponse)
+                        mockHTTPService.performHTTPRequestUrlRequestSuccessStatusCodesReturnValue = .success(success)
                     }
 
                     context("and the data successfully decodes to an object") {
@@ -70,12 +70,10 @@ class DecodableServiceTests: QuickSpec {
                                                           intValue: 100,
                                                           doubleValue: 1.5)
 
-                        beforeEach {
+                        beforeEach { _ in
                             mockDecoder.decodeFromReturnValue = stubDecodable
 
-                            decodableService.performRequest(dummyURLRequest) { result in
-                                returnedResult = result
-                            }
+                            returnedResult = await decodableService.performRequest(urlRequest: dummyURLRequest)
                         }
 
                         it("passes back the decoded object") {
@@ -91,12 +89,10 @@ class DecodableServiceTests: QuickSpec {
 
                     context("and the data fails to decode to an object") {
 
-                        beforeEach {
+                        beforeEach { _ in
                             mockDecoder.decodeFromThrowableError = StubError.plainError
 
-                            decodableService.performRequest(dummyURLRequest) { result in
-                                returnedResult = result
-                            }
+                            returnedResult = await decodableService.performRequest(urlRequest: dummyURLRequest)
                         }
 
                         it("passes back error .failedToDecodeObject") {
@@ -117,122 +113,59 @@ class DecodableServiceTests: QuickSpec {
 
                 }
 
-                context("and that result contains a .sansData instance") {
+            }
 
-                    beforeEach {
-                        mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
-                            completion(.success(.sansHTTPData(stubURLResponse)))
-                        }
+            context("else when the HTTPService passes back a .failure(.nonSuccessfulStatusCode) result") {
 
-                        decodableService.performRequest(dummyURLRequest) { result in
-                            returnedResult = result
-                        }
+                beforeEach {
+                    mockHTTPService.performHTTPRequestUrlRequestSuccessStatusCodesReturnValue =
+                        .failure(.nonSuccessfulStatusCode(stubData, stubURLResponse))
+                }
+
+                context("and its data decodes to an error payload object") {
+
+                    let stubErrorPayload = StubDecodableErrorPayload(error: "Something blew up!")
+
+                    beforeEach { _ in
+                        mockDecoder.decodeFromReturnValue = stubErrorPayload
+
+                        returnedResult = await decodableService.performRequest(urlRequest: dummyURLRequest)
                     }
 
-                    it("passes back error .noDataReturned") {
+                    it("passes back error .errorPayloadReturned") {
                         guard case let .failure(returnedError) = returnedResult,
-                            case let .unexpected(unexpectedError) = returnedError,
-                            case let .noDataReturned(urlResponse) = unexpectedError
+                              case let .errorPayloadReturned(errorPayload, urlResponse) = returnedError
                         else {
                             fail("Unexpected result: \(String(describing: returnedResult))")
                             return
                         }
 
+                        expect(errorPayload) == stubErrorPayload
                         expect(urlResponse) == stubURLResponse
                     }
 
                 }
 
-            }
+                context("and its data fails to decode to an error payload object") {
 
-            context("else when the HTTPService passes back a .failure(.nonSuccessfulStatusCode) result") {
+                    beforeEach { _ in
+                        mockDecoder.decodeFromThrowableError = StubError.plainError
 
-                context("and its data arg is not nil") {
-
-                    beforeEach {
-                        mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
-                            completion(.failure(.nonSuccessfulStatusCode(stubData, stubURLResponse)))
-                        }
+                        returnedResult = await decodableService.performRequest(urlRequest: dummyURLRequest)
                     }
 
-                    context("and its data decodes to an error payload object") {
-
-                        let stubErrorPayload = StubDecodableErrorPayload(error: "Something blew up!")
-
-                        beforeEach {
-                            mockDecoder.decodeFromReturnValue = stubErrorPayload
-
-                            decodableService.performRequest(dummyURLRequest) { result in
-                                returnedResult = result
-                            }
-                        }
-
-                        it("passes back error .errorPayloadReturned") {
-                            guard case let .failure(returnedError) = returnedResult,
-                                case let .errorPayloadReturned(errorPayload, urlResponse) = returnedError
-                            else {
-                                fail("Unexpected result: \(String(describing: returnedResult))")
-                                return
-                            }
-
-                            expect(errorPayload) == stubErrorPayload
-                            expect(urlResponse) == stubURLResponse
-                        }
-
-                    }
-
-                    context("and its data fails to decode to an error payload object") {
-
-                        beforeEach {
-                            mockDecoder.decodeFromThrowableError = StubError.plainError
-
-                            decodableService.performRequest(dummyURLRequest) { result in
-                                returnedResult = result
-                            }
-                        }
-
-                        it("passes back error .failedToDecodeErrorPayload") {
-                            guard case let .failure(returnedError) = returnedResult,
-                                case let .unexpected(unexpectedError) = returnedError,
-                                case let .failedToDecodeErrorPayload(data, urlResponse, underlyingError) = unexpectedError
-                            else {
-                                fail("Unexpected result: \(String(describing: returnedResult))")
-                                return
-                            }
-
-                            expect(data) == stubData
-                            expect(urlResponse) == stubURLResponse
-                            expect(underlyingError as? StubError) == .plainError
-                        }
-
-                    }
-
-                }
-
-                context("and its data arg is nil") {
-
-                    let stubHTTPServiceError = HTTPServiceError.nonSuccessfulStatusCode(nil, stubURLResponse)
-
-                    beforeEach {
-                        mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
-                            completion(.failure(stubHTTPServiceError))
-                        }
-
-                        decodableService.performRequest(dummyURLRequest) { result in
-                            returnedResult = result
-                        }
-                    }
-
-                    it("passes back error .httpServiceError") {
+                    it("passes back error .failedToDecodeErrorPayload") {
                         guard case let .failure(returnedError) = returnedResult,
-                            case let .unexpected(unexpectedError) = returnedError,
-                            case let .httpServiceError(underlyingError) = unexpectedError
+                              case let .unexpected(unexpectedError) = returnedError,
+                              case let .failedToDecodeErrorPayload(data, urlResponse, underlyingError) = unexpectedError
                         else {
                             fail("Unexpected result: \(String(describing: returnedResult))")
                             return
                         }
 
-                        expect(underlyingError) == stubHTTPServiceError
+                        expect(data) == stubData
+                        expect(urlResponse) == stubURLResponse
+                        expect(underlyingError as? StubError) == .plainError
                     }
 
                 }
@@ -243,58 +176,47 @@ class DecodableServiceTests: QuickSpec {
 
                 let stubHTTPServiceError = HTTPServiceError.unexpectedResponseType(stubData, stubURLResponse)
 
-                beforeEach {
-                    mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
-                        completion(.failure(stubHTTPServiceError))
-                    }
+                beforeEach { _ in
+                    mockHTTPService.performHTTPRequestUrlRequestSuccessStatusCodesReturnValue =
+                        .failure(stubHTTPServiceError)
 
-                    decodableService.performRequest(dummyURLRequest) { result in
-                        returnedResult = result
-                    }
+                    returnedResult = await decodableService.performRequest(urlRequest: dummyURLRequest)
                 }
 
                 it("passes back error .httpServiceError") {
-                    guard case let .failure(returnedError) = returnedResult,
-                        case let .unexpected(unexpectedError) = returnedError,
-                        case let .httpServiceError(underlyingError) = unexpectedError
+                    guard case let .failure(.unexpected(.httpServiceError(error))) = returnedResult,
+                          case let .unexpectedResponseType(data, urlResponse) = error as? HTTPServiceError
                     else {
                         fail("Unexpected result: \(String(describing: returnedResult))")
                         return
                     }
 
-                    expect(underlyingError) == stubHTTPServiceError
+                    expect(data) == stubData
+                    expect(urlResponse) == stubURLResponse
                 }
 
             }
 
             context("else when the HTTPService passes back a .failure(.networkDataServiceError) result") {
 
-                let stubHTTPServiceError = HTTPServiceError.networkDataServiceError(.unexpectedResponseArgs(
-                    nil,
-                    nil,
-                    nil
-                ))
+                let stubHTTPServiceError = HTTPServiceError.networkDataServiceError(IgnoredEquatable(StubError.plainError))
 
-                beforeEach {
-                    mockHTTPService.performHTTPRequestSuccessStatusCodesCompletionClosure = { _, _, completion in
-                        completion(.failure(stubHTTPServiceError))
-                    }
+                beforeEach { _ in
+                    mockHTTPService.performHTTPRequestUrlRequestSuccessStatusCodesReturnValue =
+                        .failure(stubHTTPServiceError)
 
-                    decodableService.performRequest(dummyURLRequest) { result in
-                        returnedResult = result
-                    }
+                    returnedResult = await decodableService.performRequest(urlRequest: dummyURLRequest)
                 }
 
                 it("passes back error .httpServiceError") {
-                    guard case let .failure(returnedError) = returnedResult,
-                        case let .unexpected(unexpectedError) = returnedError,
-                        case let .httpServiceError(underlyingError) = unexpectedError
+                    guard case let .failure(.unexpected(.httpServiceError(error))) = returnedResult,
+                          case let .networkDataServiceError(underlyingError) = error as? HTTPServiceError
                     else {
                         fail("Unexpected result: \(String(describing: returnedResult))")
                         return
                     }
 
-                    expect(underlyingError) == stubHTTPServiceError
+                    expect(underlyingError.value as? StubError) == .plainError
                 }
 
             }

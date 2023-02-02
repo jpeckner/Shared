@@ -24,7 +24,6 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
 public extension Text {
 
     func applyTextLayout(_ textLayout: TextLayout) -> some View {

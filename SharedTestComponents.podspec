@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
     :tag => 'v' + s.version.to_s 
   }
 
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '15.0'
   s.source_files = 'SharedTestComponents/**/*.swift'
-  s.swift_version = '5.1'
+  s.swift_version = '5.7'
   s.resources = [
     'SharedTestComponents/Sourcery/Templates/*'
   ]

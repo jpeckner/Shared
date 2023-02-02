@@ -24,68 +24,56 @@
 
 import Foundation
 
-public enum HTTPServiceResponse: Equatable {
-    case withHTTPData(Data, HTTPURLResponse)
-    case sansHTTPData(HTTPURLResponse)
+public struct HTTPServiceSuccess {
+    public let data: Data
+    public let response: HTTPURLResponse
+
+    public init(data: Data, response: HTTPURLResponse) {
+        self.data = data
+        self.response = response
+    }
 }
 
-public enum HTTPServiceError: Error, Equatable {
-    case networkDataServiceError(NetworkDataServiceError)
-    case unexpectedResponseType(Data?, URLResponse)
-    case nonSuccessfulStatusCode(Data?, HTTPURLResponse)
+public enum HTTPServiceError: Error {
+    case networkDataServiceError(IgnoredEquatable<Error>)
+    case unexpectedResponseType(Data, URLResponse)
+    case nonSuccessfulStatusCode(Data, HTTPURLResponse)
 }
 
-public typealias HTTPServiceResult = Result<HTTPServiceResponse, HTTPServiceError>
-public typealias HTTPServiceCompletion = (HTTPServiceResult) -> Void
+public typealias HTTPServiceResult = Result<HTTPServiceSuccess, HTTPServiceError>
 
-public protocol HTTPServiceProtocol: AutoMockable {
-    func performHTTPRequest(_ urlRequest: URLRequest,
-                            successStatusCodes: Set<Int>,
-                            completion: @escaping HTTPServiceCompletion)
+// sourcery:AutoMockable
+public protocol HTTPServiceProtocol {
+    func performHTTPRequest(urlRequest: URLRequest,
+                            successStatusCodes: Set<Int>) async -> HTTPServiceResult
 }
 
 public class HTTPService: HTTPServiceProtocol {
 
-    private let networkDataService: NetworkDataServiceProtocol
+    private let urlSession: URLSessionProtocol
 
-    public init(networkDataService: NetworkDataServiceProtocol) {
-        self.networkDataService = networkDataService
+    public init(urlSession: URLSessionProtocol) {
+        self.urlSession = urlSession
     }
 
-    public func performHTTPRequest(_ urlRequest: URLRequest,
-                                   successStatusCodes: Set<Int>,
-                                   completion: @escaping HTTPServiceCompletion) {
-        networkDataService.performDataTask(urlRequest) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.processNetworkDataServiceResponse(response,
-                                                        successStatusCodes: successStatusCodes,
-                                                        completion: completion)
-            case .failure(let error):
-                completion(.failure(.networkDataServiceError(error)))
+    public func performHTTPRequest(urlRequest: URLRequest,
+                                   successStatusCodes: Set<Int>) async -> HTTPServiceResult {
+        do {
+            let (data, urlResponse) = try await urlSession.data(for: urlRequest)
+            
+            guard let httpURLResponse = urlResponse as? HTTPURLResponse else {
+                return .failure(.unexpectedResponseType(data, urlResponse))
             }
-        }
-    }
 
-    private func processNetworkDataServiceResponse(_ response: NetworkDataServiceResponse,
-                                                   successStatusCodes: Set<Int>,
-                                                   completion: @escaping HTTPServiceCompletion) {
-        let data = response.data
-        guard let httpURLResponse = response.urlResponse as? HTTPURLResponse else {
-            completion(.failure(.unexpectedResponseType(data, response.urlResponse)))
-            return
-        }
-
-        guard successStatusCodes.contains(httpURLResponse.statusCode) else {
-            completion(.failure(.nonSuccessfulStatusCode(data, httpURLResponse)))
-            return
-        }
-
-        switch response {
-        case let .withData(data, _):
-            completion(.success(.withHTTPData(data, httpURLResponse)))
-        case .sansData:
-            completion(.success(.sansHTTPData(httpURLResponse)))
+            guard successStatusCodes.contains(httpURLResponse.statusCode) else {
+                return .failure(.nonSuccessfulStatusCode(data, httpURLResponse))
+            }
+            
+            let success = HTTPServiceSuccess(data: data,
+                                             response: httpURLResponse)
+            return .success(success)
+        } catch {
+            return .failure(.networkDataServiceError(IgnoredEquatable(error)))
         }
     }
 

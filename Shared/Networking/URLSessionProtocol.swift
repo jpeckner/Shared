@@ -24,18 +24,9 @@
 
 import Foundation
 
-public protocol URLSessionDataTaskProtocol: AutoMockable {
-    func resume()
-}
-
-extension URLSessionDataTask: URLSessionDataTaskProtocol {}
-
-// sourcery: genericTypes = "TSessionDataTask: URLSessionDataTaskProtocol"
-public protocol URLSessionProtocol: AutoMockable {
-    associatedtype TSessionDataTask: URLSessionDataTaskProtocol
-
-    func dataTask(with request: URLRequest,
-                  completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> TSessionDataTask
+// sourcery:AutoMockable
+public protocol URLSessionProtocol {
+    func data(for request: URLRequest) async throws -> (Data, URLResponse)
 }
 
 extension URLSession: URLSessionProtocol {}

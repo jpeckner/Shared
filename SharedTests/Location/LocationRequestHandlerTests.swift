@@ -55,7 +55,7 @@ class LocationRequestHandlerTests: QuickSpec {
             }
 
             it("calls mockLocationManager.startUpdatingLocation()") {
-                expect(mockLocationManager.startUpdatingLocationCalled).toEventually(beTrue())
+                await expect(mockLocationManager.startUpdatingLocationCalled).toEventually(beTrue())
             }
         }
 
@@ -89,7 +89,7 @@ class LocationRequestHandlerTests: QuickSpec {
                     }
 
                     it("calls back each subscriber with the value") {
-                        expect(receivedResults).toEventually(equal(expectedReceivedResults))
+                        await expect(receivedResults).toEventually(equal(expectedReceivedResults))
                     }
 
                     context("when didUpdateLocations is again called before subscribers call requestLocation()") {
@@ -99,7 +99,7 @@ class LocationRequestHandlerTests: QuickSpec {
                         }
 
                         it("does not call back the subscribers a second time") {
-                            expect(receivedResults).toEventually(equal(expectedReceivedResults))
+                            await expect(receivedResults).toEventually(equal(expectedReceivedResults))
                         }
                     }
                 }
@@ -134,7 +134,7 @@ class LocationRequestHandlerTests: QuickSpec {
                     }
 
                     it("calls back each subscriber with the value") {
-                        expect(receivedResults).toEventually(equal(expectedReceivedResults))
+                        await expect(receivedResults).toEventually(equal(expectedReceivedResults))
                     }
 
                     context("when didUpdateLocations is again called before subscribers call requestLocation()") {
@@ -144,7 +144,7 @@ class LocationRequestHandlerTests: QuickSpec {
                         }
 
                         it("does not call back the subscribers a second time") {
-                            expect(receivedResults).toEventually(equal(expectedReceivedResults))
+                            await expect(receivedResults).toEventually(equal(expectedReceivedResults))
                         }
                     }
                 }
