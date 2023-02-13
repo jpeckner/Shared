@@ -42,7 +42,8 @@ public enum LocationRequestError: Error, Equatable {
 
 public typealias LocationRequestResult = Result<LocationCoordinate, LocationRequestError>
 
-public protocol LocationDelegateHandlerProtocol: AutoMockable {
+// sourcery: AutoMockable
+public protocol LocationDelegateHandlerProtocol {
     func resultForDidUpdateLocations(_ locations: [CLLocationProtocol],
                                      dateManagerInitialized: Date) -> LocationRequestResult?
 

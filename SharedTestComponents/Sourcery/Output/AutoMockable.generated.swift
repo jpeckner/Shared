@@ -187,12 +187,6 @@ public class LocationRequestHandlerProtocolMock: LocationRequestHandlerProtocol 
     }
 
 }
-public class ResettableAutoMockableMock: ResettableAutoMockable {
-
-    public init() {}
-
-
-}
 public class UIWindowProtocolMock: UIWindowProtocol {
 
     public init() {}

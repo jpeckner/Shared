@@ -38,7 +38,8 @@ public struct GroupedTableBasicCellViewModel: Equatable {
     }
 }
 
-public enum GroupedTableViewCellModel: Equatable, AutoCellType {
+// sourcery: AutoCellType
+public enum GroupedTableViewCellModel: Equatable {
     // sourcery: cellType = "UITableViewCell"
     case basic(GroupedTableBasicCellViewModel)
 }

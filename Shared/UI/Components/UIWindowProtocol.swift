@@ -24,7 +24,8 @@
 
 import UIKit
 
-public protocol UIWindowProtocol: AnyObject, AutoMockable {
+// sourcery: AutoMockable
+public protocol UIWindowProtocol: AnyObject {
     var rootViewController: UIViewController? { get set }
 
     func makeKeyAndVisible()
