@@ -33,6 +33,8 @@ import Shared
 
 
 
+
+
 public class CLLocationManagerAuthProtocolMock: CLLocationManagerAuthProtocol {
 
     public init() {}
@@ -187,12 +189,6 @@ public class LocationRequestHandlerProtocolMock: LocationRequestHandlerProtocol 
     }
 
 }
-public class ResettableAutoMockableMock: ResettableAutoMockable {
-
-    public init() {}
-
-
-}
 public class UIWindowProtocolMock: UIWindowProtocol {
 
     public init() {}
@@ -282,10 +278,10 @@ public class URLSessionProtocolMock: URLSessionProtocol {
     public var dataForClosure: ((URLRequest) async throws -> (Data, URLResponse))?
 
     public func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        dataForCallsCount += 1
         if let error = dataForThrowableError {
             throw error
         }
-        dataForCallsCount += 1
         dataForReceivedRequest = request
         dataForReceivedInvocations.append(request)
         if let dataForClosure = dataForClosure {

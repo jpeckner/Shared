@@ -23,7 +23,6 @@
 		261D1738D07F3FF7DB77DE14B8BFD69B /* UIColorInitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1666DAB6E72F75587B6429E57DFD6B5 /* UIColorInitTests.swift */; };
 		2A995C8E43DDEB5A8BE0A9BBF88BC1E9 /* AutoCellType.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E46CBF9D442D5B92D2FD93E46F9943D /* AutoCellType.generated.swift */; };
 		2C91E4C8862BC1887FBB955AFAB878B0 /* UIWindowProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E85F92CE4AADA8B0337FF5BAC60059 /* UIWindowProtocol.swift */; };
-		2DC32B92B72426E53245C7AE5B0C1D4C /* AutoCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F525FED3BC0DC85DA4DB7E3D529C7501 /* AutoCellType.swift */; };
 		2E3EAC9B54B62E2936A1624612607F49 /* NonEmptyArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ADE188D529B99B50B31CBDA38C28931 /* NonEmptyArray.swift */; };
 		2F8A139CB51F638ECEDD645310E17699 /* FailableDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AF9384A19343133622528166FB860 /* FailableDecodable.swift */; };
 		2FB6F3A2CB27851C9E8053E51B5EE700 /* GroupedTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48982E3666B0B0D18ECAA97E6B48DE6 /* GroupedTableViewModel.swift */; };
@@ -58,7 +57,6 @@
 		807C52CCDFAF4D6F3B580F1637410F48 /* URLOpenerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CEF7F77362F6AD83827BC2A59E1C38 /* URLOpenerService.swift */; };
 		82FF8AC3601E80E5A7D0541A1AA38753 /* URLComponents+Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B25B36594C421CD9A89B5D4FB3E1BE /* URLComponents+Stub.swift */; };
 		8865A3B3B02A332121DF9E601AE5C7C8 /* URLRequest+InitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712D79B301D91DE2970DA430F50A6E31 /* URLRequest+InitTests.swift */; };
-		88FB4656156E3FC010C6182B1D606D6A /* AutoMockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C22281AE05994AA9D0F28A9D9B70E1E /* AutoMockable.swift */; };
 		8AA54D1E7881400AC785BABEE09EDF94 /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB7AE789E22440D83B176986E1C90E92 /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8ADFB887A24CA01F4F9603613C573181 /* CLLocationCoordinate2D+LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDAB8A0873F5E7D60C1D008F6EFDA84 /* CLLocationCoordinate2D+LocationTests.swift */; };
 		8CD09B489EE0AB673E4C630B38DC6B19 /* UIButton+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AF7EDC930EEEF27E5CAE23CB76860C /* UIButton+Styling.swift */; };
@@ -186,7 +184,6 @@
 		27891ED83D9FB9EB40228099C4B0DB3A /* UIView+Margins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Margins.swift"; sourceTree = "<group>"; };
 		27B9359A81C017C9FB6D0DE1E200DFE0 /* SpecifiedSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecifiedSizeClass.swift; sourceTree = "<group>"; };
 		28E85F92CE4AADA8B0337FF5BAC60059 /* UIWindowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowProtocol.swift; sourceTree = "<group>"; };
-		2C22281AE05994AA9D0F28A9D9B70E1E /* AutoMockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoMockable.swift; sourceTree = "<group>"; };
 		2ECE01979539407E897CDFC767A44121 /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
 		30C2AF49359FA00F2CBC1CB894F1080D /* DecodableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableService.swift; sourceTree = "<group>"; };
 		312439E9ADEDD7DC2FA99D2CB4DD9DB0 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
@@ -281,7 +278,6 @@
 		DCEBC526B7AB5B4CE1CFA04D194AEFA5 /* CastingFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastingFunctionsTests.swift; sourceTree = "<group>"; };
 		E48982E3666B0B0D18ECAA97E6B48DE6 /* GroupedTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupedTableViewModel.swift; sourceTree = "<group>"; };
 		F43F187E9A952907E0AFA7EAD856DD43 /* MKMapView+Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Region.swift"; sourceTree = "<group>"; };
-		F525FED3BC0DC85DA4DB7E3D529C7501 /* AutoCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCellType.swift; sourceTree = "<group>"; };
 		FC9407C529271037424D1E4FFDEBB75E /* CLLocationManagerAuthProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerAuthProtocol.swift; sourceTree = "<group>"; };
 		FEFC855BAA84B943F3FDADEC8DBC0C06 /* UIImageView+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Init.swift"; sourceTree = "<group>"; };
 		FF4BB52CEB2C229392F7D57D5B676DBC /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
@@ -557,7 +553,6 @@
 			isa = PBXGroup;
 			children = (
 				96EA6066D110D431FDDDEFFA13794FA3 /* Output */,
-				C76CFAC61B568291B7EC4A8A31777E73 /* Protocols */,
 				515FA9D2708B2F4F2F7F25E574FC959B /* Templates */,
 			);
 			path = Sourcery;
@@ -681,15 +676,6 @@
 				28E85F92CE4AADA8B0337FF5BAC60059 /* UIWindowProtocol.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		C76CFAC61B568291B7EC4A8A31777E73 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				F525FED3BC0DC85DA4DB7E3D529C7501 /* AutoCellType.swift */,
-				2C22281AE05994AA9D0F28A9D9B70E1E /* AutoMockable.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		CA8481E024301AE80011CC24 /* Sourcery */ = {
@@ -940,8 +926,6 @@
 				B6C098B2C0FCF8519006AF76FD9DB37A /* ActionableButton.swift in Sources */,
 				3EB45E6C1B12FCF842331C108F940EB9 /* AssertionHandler.swift in Sources */,
 				2A995C8E43DDEB5A8BE0A9BBF88BC1E9 /* AutoCellType.generated.swift in Sources */,
-				2DC32B92B72426E53245C7AE5B0C1D4C /* AutoCellType.swift in Sources */,
-				88FB4656156E3FC010C6182B1D606D6A /* AutoMockable.swift in Sources */,
 				9FB4316C0D7721DDC0057521F9B306CC /* CLLocationCoordinate2D+Location.swift in Sources */,
 				6DDAAF803E902412D427002E65783364 /* CLLocationManagerAuthProtocol.swift in Sources */,
 				F91AEE8DBC77A50CA044421B6121F966 /* CLLocationManagerRequestProtocol.swift in Sources */,

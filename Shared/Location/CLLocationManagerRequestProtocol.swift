@@ -24,7 +24,8 @@
 
 import CoreLocation
 
-public protocol CLLocationManagerRequestProtocol: AnyObject, AutoMockable {
+// sourcery: AutoMockable
+public protocol CLLocationManagerRequestProtocol: AnyObject {
     var delegate: CLLocationManagerDelegate? { get set }
 
     func startUpdatingLocation()

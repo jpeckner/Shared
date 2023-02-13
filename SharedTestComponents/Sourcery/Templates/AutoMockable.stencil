@@ -16,6 +16,10 @@ import {{ import }}
 @testable import {{ import }}
 {% endfor %}
 
+{% macro genericTypesDeclaration type %}{% if type.annotations.genericTypes %}<{{ type.annotations.genericTypes }}>{% endif %}{% endmacro %}
+
+{% macro genericConstraintsDeclaration type %}{% if type.annotations.genericConstraints %} where {{ type.annotations.genericConstraints }}{% endif %}{% endmacro %}
+
 {% macro swiftifyMethodName name %}{{ name | replace:"(","_" | replace:")","" | replace:":","_" | replace:"`","" | snakeToCamelCase | lowerFirstWord }}{% endmacro %}
 
 {% macro accessLevel level %}{% if level != 'internal' %}{{ level }} {% endif %}{% endmacro %}
@@ -88,10 +92,10 @@ import {{ import }}
     {% endfor %}
     {% endfor %}
     {% call accessLevel method.accessLevel %}func {{ method.name }}{{ ' async' if method.isAsync }}{{ ' throws' if method.throws }}{% if not method.returnTypeName.isVoid %} -> {{ method.returnTypeName }}{% endif %} {
+        {% call swiftifyMethodName method.selectorName %}CallsCount += 1
         {% if method.throws %}
         {% call methodThrowableErrorUsage method %}
         {% endif %}
-        {% call swiftifyMethodName method.selectorName %}CallsCount += 1
         {% call methodReceivedParameters method %}
         {% if method.returnTypeName.isVoid %}
         {% if method.throws %}try {% endif %}{% if method.isAsync %}await {% endif %}{% call methodClosureName method %}?({% call methodClosureCallParameters method %})
@@ -147,10 +151,10 @@ import {{ import }}
 
     {% call accessLevel variable.readAccess %}var {% call mockedVariableName variable %}: {{ variable.typeName }} {
         get {% if variable.isAsync %}async {% endif %}{% if variable.throws %}throws {% endif %}{
+            {% call mockedVariableName variable %}CallsCount += 1
             {% if variable.throws %}
             {% call variableThrowableErrorUsage variable %}
             {% endif %}
-            {% call mockedVariableName variable %}CallsCount += 1
             if let {% call variableClosureName variable %} = {% call variableClosureName variable %} {
                 return {{ 'try ' if variable.throws }}{{ 'await ' if variable.isAsync }}{% call variableClosureName variable %}()
             } else {
@@ -169,7 +173,7 @@ import {{ import }}
 {% macro mockedVariableName variable %}{{ variable.name }}{% endmacro %}
 
 {% for type in types.protocols where type.based.AutoMockable or type|annotated:"AutoMockable" %}{% if type.name != "AutoMockable" %}
-{% call accessLevel type.accessLevel %}class {{ type.name }}Mock: {{ type.name }} {
+{% call accessLevel type.accessLevel %}class {{ type.name }}Mock{% call genericTypesDeclaration type %}: {{ type.name }}{% call genericConstraintsDeclaration type %} {
 
     {% if type.accessLevel == "public" %}public init() {}{% endif %}
 

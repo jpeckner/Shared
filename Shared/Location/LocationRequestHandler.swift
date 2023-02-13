@@ -25,7 +25,8 @@
 import CoreLocation
 import Foundation
 
-public protocol LocationRequestHandlerProtocol: AutoMockable {
+// sourcery: AutoMockable
+public protocol LocationRequestHandlerProtocol {
     func requestLocation(_ callback: @escaping (LocationRequestResult) -> Void)
 }
 

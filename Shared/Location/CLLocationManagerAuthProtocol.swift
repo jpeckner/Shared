@@ -24,7 +24,8 @@
 
 import CoreLocation
 
-public protocol CLLocationManagerAuthProtocol: AnyObject, AutoMockable {
+// sourcery: AutoMockable
+public protocol CLLocationManagerAuthProtocol: AnyObject {
     var delegate: CLLocationManagerDelegate? { get set }
 
     func requestWhenInUseAuthorization()

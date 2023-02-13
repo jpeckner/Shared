@@ -58,7 +58,8 @@ private extension URLOpenerProtocol {
 
 // MARK: URLOpenerService
 
-public protocol URLOpenerServiceProtocol: AutoMockable {
+// sourcery: AutoMockable
+public protocol URLOpenerServiceProtocol {
     var openSettingsBlock: OpenURLBlock? { get }
 
     func buildOpenURLBlock(_ url: URL) -> OpenURLBlock?
