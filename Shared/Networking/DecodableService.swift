@@ -44,13 +44,13 @@ public typealias DecodableServiceResult<
     TErrorPayload: Decodable
 > = Result<TEntity, DecodableServiceError<TErrorPayload>>
 
-public protocol DecodableServiceProtocol {
+public protocol DecodableServiceProtocol: Sendable {
     func performRequest<TEntity: Decodable, TErrorPayload: Decodable>(
         urlRequest: URLRequest
     ) async -> DecodableServiceResult<TEntity, TErrorPayload>
 }
 
-public class DecodableService: DecodableServiceProtocol {
+public actor DecodableService: DecodableServiceProtocol {
 
     private let httpService: HTTPServiceProtocol
     private let decoder: DecoderProtocol

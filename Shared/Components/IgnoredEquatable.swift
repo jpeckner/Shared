@@ -25,18 +25,20 @@
 import Foundation
 
 /// Use IgnoredEquatable for types in which the wrapped value doesn't matter for Equatable purposes.
-public struct IgnoredEquatable<T> {
-    public let value: T
+public struct IgnoredEquatable<TElement> {
+    public let value: TElement
 
-    public init(_ value: T) {
+    public init(_ value: TElement) {
         self.value = value
     }
 }
 
 extension IgnoredEquatable: Equatable {
 
-    public static func == (lhs: IgnoredEquatable<T>, rhs: IgnoredEquatable<T>) -> Bool {
+    public static func == (lhs: IgnoredEquatable<TElement>, rhs: IgnoredEquatable<TElement>) -> Bool {
         return true
     }
 
 }
+
+extension IgnoredEquatable: Sendable where TElement: Sendable {}

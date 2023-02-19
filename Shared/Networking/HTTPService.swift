@@ -24,7 +24,7 @@
 
 import Foundation
 
-public struct HTTPServiceSuccess {
+public struct HTTPServiceSuccess: Sendable {
     public let data: Data
     public let response: HTTPURLResponse
 
@@ -34,7 +34,7 @@ public struct HTTPServiceSuccess {
     }
 }
 
-public enum HTTPServiceError: Error {
+public enum HTTPServiceError: Error, Sendable {
     case networkDataServiceError(IgnoredEquatable<Error>)
     case unexpectedResponseType(Data, URLResponse)
     case nonSuccessfulStatusCode(Data, HTTPURLResponse)
@@ -43,12 +43,12 @@ public enum HTTPServiceError: Error {
 public typealias HTTPServiceResult = Result<HTTPServiceSuccess, HTTPServiceError>
 
 // sourcery:AutoMockable
-public protocol HTTPServiceProtocol {
+public protocol HTTPServiceProtocol: Sendable {
     func performHTTPRequest(urlRequest: URLRequest,
                             successStatusCodes: Set<Int>) async -> HTTPServiceResult
 }
 
-public class HTTPService: HTTPServiceProtocol {
+public actor HTTPService: HTTPServiceProtocol {
 
     private let urlSession: URLSessionProtocol
 

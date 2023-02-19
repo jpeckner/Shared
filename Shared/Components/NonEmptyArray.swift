@@ -24,50 +24,52 @@
 
 import Foundation
 
-public struct NonEmptyArray<T> {
-    public let value: [T]
+public struct NonEmptyArray<TElement> {
+    public let value: [TElement]
 
-    public init(with instance: T) {
+    public init(with instance: TElement) {
         self.init(value: [instance])
     }
 
-    public init?(_ value: [T]) {
+    public init?(_ value: [TElement]) {
         guard !value.isEmpty else { return nil }
         self.init(value: value)
     }
 
-    private init(value: [T]) {
+    private init(value: [TElement]) {
         self.value = value
     }
 }
 
-extension NonEmptyArray: Equatable where T: Equatable {}
+extension NonEmptyArray: Equatable where TElement: Equatable {}
 
-extension NonEmptyArray: Hashable where T: Hashable {}
+extension NonEmptyArray: Hashable where TElement: Hashable {}
+
+extension NonEmptyArray: Sendable where TElement: Sendable {}
 
 public extension NonEmptyArray {
 
-    var first: T {
+    var first: TElement {
         return value[0]
     }
 
-    var last: T {
+    var last: TElement {
         return value[value.count - 1]
     }
 
-    func replacingLast(with element: T) -> NonEmptyArray<T> {
+    func replacingLast(with element: TElement) -> NonEmptyArray<TElement> {
         return NonEmptyArray(value: Array(value.dropLast()) + [element])
     }
 
-    func appendedWith(_ otherArray: [T]) -> NonEmptyArray<T> {
+    func appendedWith(_ otherArray: [TElement]) -> NonEmptyArray<TElement> {
         return NonEmptyArray(value: value + otherArray)
     }
 
-    func sorted(by block: (T, T) -> Bool) -> NonEmptyArray<T> {
+    func sorted(by block: (TElement, TElement) -> Bool) -> NonEmptyArray<TElement> {
         return NonEmptyArray(value: value.sorted(by: block))
     }
 
-    func withTransformation<N>(transform: (T) -> N) -> NonEmptyArray<N> {
+    func withTransformation<N>(transform: (TElement) -> N) -> NonEmptyArray<N> {
         let transformedValue = value.map(transform)
         return NonEmptyArray<N>(value: transformedValue)
     }

@@ -24,8 +24,11 @@
 
 import Foundation
 
-public protocol DecoderProtocol {
+public protocol DecoderProtocol: Sendable {
     func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T
 }
 
 extension JSONDecoder: DecoderProtocol {}
+
+// This can be removed when this library only supports iOS 16 or higher, as JSONDecoder conforms to `Sendable` then
+extension JSONDecoder: @unchecked Sendable {}

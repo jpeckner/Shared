@@ -28,7 +28,7 @@ public enum NonEmptyStringError: Error {
     case initValueEmpty
 }
 
-public struct NonEmptyString: Hashable {
+public struct NonEmptyString: Hashable, Sendable {
     public let value: String
 
     public init(_ value: String) throws {
@@ -56,7 +56,7 @@ private extension NonEmptyString {
 
 // MARK: NonEmptyArray extension
 
-public extension NonEmptyArray where T == NonEmptyString {
+public extension NonEmptyArray where TElement == NonEmptyString {
 
     var asStringArray: [String] {
         return (withTransformation { $0.value }).value

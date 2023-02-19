@@ -23,17 +23,17 @@
 //  SOFTWARE.
 
 /// Use IgnoredHashable for types in which the wrapped value doesn't matter for Hashable purposes.
-public struct IgnoredHashable<T> {
-    public let value: T
+public struct IgnoredHashable<TElement> {
+    public let value: TElement
 
-    public init(_ value: T) {
+    public init(_ value: TElement) {
         self.value = value
     }
 }
 
 extension IgnoredHashable: Equatable {
 
-    public static func == (lhs: IgnoredHashable<T>, rhs: IgnoredHashable<T>) -> Bool {
+    public static func == (lhs: IgnoredHashable<TElement>, rhs: IgnoredHashable<TElement>) -> Bool {
         return true
     }
 
@@ -44,3 +44,5 @@ extension IgnoredHashable: Hashable {
     public func hash(into hasher: inout Hasher) {}
 
 }
+
+extension IgnoredHashable: Sendable where TElement: Sendable {}

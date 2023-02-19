@@ -25,7 +25,7 @@
 import SwiftUI
 import UIKit
 
-public struct TextColoring: Equatable {
+public struct TextColoring: Equatable, Sendable {
     public let textColor: UIColor
 
     public init(textColor: UIColor) {

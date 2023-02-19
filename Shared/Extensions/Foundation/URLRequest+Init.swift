@@ -24,12 +24,10 @@
 
 import Foundation
 
-public enum URLRequestType: String {
+public enum URLRequestType: String, Sendable {
     case GET
 
-    var httpMethod: String {
-        return rawValue
-    }
+    var httpMethod: String { rawValue }
 }
 
 public extension URLRequest {

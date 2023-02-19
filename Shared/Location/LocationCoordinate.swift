@@ -26,7 +26,7 @@ import CoreLocation
 import Foundation
 
 // Replace this with CLLocationCoordinate2D if that type ever implements Hashable
-public struct LocationCoordinate: Hashable {
+public struct LocationCoordinate: Hashable, Sendable {
     public let latitude: Double
     public let longitude: Double
 
