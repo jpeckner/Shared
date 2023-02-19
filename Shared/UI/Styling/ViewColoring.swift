@@ -24,7 +24,7 @@
 
 import UIKit
 
-public struct ViewColoring: Equatable {
+public struct ViewColoring: Equatable, Sendable {
     public let backgroundColor: UIColor
 
     public init(backgroundColor: UIColor) {

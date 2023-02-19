@@ -24,7 +24,7 @@
 
 import Foundation
 
-public enum MeasurementSystem: CaseIterable {
+public enum MeasurementSystem: CaseIterable, Sendable {
     case imperial
     case metric
 }

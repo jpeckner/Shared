@@ -24,7 +24,7 @@
 
 import Foundation
 
-public struct Percentage: Hashable {
+public struct Percentage: Hashable, Sendable {
     public static let oneHundredPercent = Percentage(fromPercentageInt: 100)
     public static let zeroPercent = Percentage(fromPercentageInt: 0)
 

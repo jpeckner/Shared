@@ -27,7 +27,7 @@ import Shared
 
 // swiftlint:disable force_cast
 // swiftlint:disable implicitly_unwrapped_optional
-public class DecoderProtocolMock: DecoderProtocol {
+public class DecoderProtocolMock: DecoderProtocol, @unchecked Sendable {
 
     // MARK: - decode<T>
 
@@ -44,12 +44,13 @@ public class DecoderProtocolMock: DecoderProtocol {
     public init() {}
 
     public func decode<T: Decodable>(_ type: T.Type, from data: Data) throws -> T {
+        decodeFromCallsCount += 1
+        decodeFromReceivedArguments = (type: type, data: data)
+
         if let error = decodeFromThrowableError {
             throw error
         }
 
-        decodeFromCallsCount += 1
-        decodeFromReceivedArguments = (type: type, data: data)
         return try decodeFromClosure.map { try $0(type, data) } as? T ?? decodeFromReturnValue as! T
     }
 

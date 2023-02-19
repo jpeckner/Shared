@@ -24,7 +24,7 @@
 
 import UIKit
 
-public struct FillColoring: Equatable {
+public struct FillColoring: Equatable, Sendable {
     public let color: UIColor
 
     public init(color: UIColor) {

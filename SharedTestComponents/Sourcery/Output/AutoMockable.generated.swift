@@ -35,6 +35,7 @@ import Shared
 
 
 
+
 public class CLLocationManagerAuthProtocolMock: CLLocationManagerAuthProtocol {
 
     public init() {}
@@ -88,7 +89,7 @@ public class CLLocationManagerRequestProtocolMock: CLLocationManagerRequestProto
     }
 
 }
-public class HTTPServiceProtocolMock: HTTPServiceProtocol {
+public class HTTPServiceProtocolMock: HTTPServiceProtocol, @unchecked Sendable {
 
     public init() {}
 
@@ -260,7 +261,7 @@ public class URLOpenerServiceProtocolMock: URLOpenerServiceProtocol {
     }
 
 }
-public class URLSessionProtocolMock: URLSessionProtocol {
+public class URLSessionProtocolMock: URLSessionProtocol, @unchecked Sendable {
 
     public init() {}
 

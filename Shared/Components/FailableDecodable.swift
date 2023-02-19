@@ -25,16 +25,18 @@
 import Foundation
 
 /// See FailableDecodableTests for important notes/use-cases of this struct.
-public struct FailableDecodable<D: Decodable> {
-    public let value: D?
+public struct FailableDecodable<TDecodable: Decodable> {
+    public let value: TDecodable?
 }
 
 extension FailableDecodable: Decodable {
 
     public init(from decoder: Decoder) throws {
-        self.value = try? decoder.singleValueContainer().decode(D.self)
+        self.value = try? decoder.singleValueContainer().decode(TDecodable.self)
     }
 
 }
 
-extension FailableDecodable: Equatable where D: Equatable {}
+extension FailableDecodable: Equatable where TDecodable: Equatable {}
+
+extension FailableDecodable: Sendable where TDecodable: Sendable {}
