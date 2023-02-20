@@ -51,7 +51,14 @@ class LocationRequestHandlerTests: QuickSpec {
 
         describe("requestLocation") {
             beforeEach {
-                locationRequestHandler.requestLocation { _ in }
+                let stubResult = LocationRequestResult.success(LocationCoordinate(latitude: 10.0, longitude: 10.0))
+                mockDelegateHandler.resultForDidUpdateLocationsDateManagerInitializedReturnValue = stubResult
+                mockLocationManager.startUpdatingLocationClosure = {
+                    locationRequestHandler.locationManager(dummyLocationManager,
+                                                           didUpdateLocations: [])
+                }
+
+                _ = await locationRequestHandler.requestLocation()
             }
 
             it("calls mockLocationManager.startUpdatingLocation()") {
@@ -73,15 +80,16 @@ class LocationRequestHandlerTests: QuickSpec {
                     beforeEach {
                         mockDelegateHandler.resultForDidUpdateLocationsDateManagerInitializedReturnValue = stubResult
 
-                        receivedResults = []
-                        for _ in 0..<numSubscribers {
-                            locationRequestHandler.requestLocation { result in
-                                receivedResults.append(result)
-                            }
+                        mockLocationManager.startUpdatingLocationClosure = {
+                            locationRequestHandler.locationManager(dummyLocationManager,
+                                                                   didUpdateLocations: [])
                         }
 
-                        locationRequestHandler.locationManager(dummyLocationManager,
-                                                               didUpdateLocations: [])
+                        receivedResults = []
+                        for _ in 0..<numSubscribers {
+                            let result = await locationRequestHandler.requestLocation()
+                            receivedResults.append(result)
+                        }
                     }
 
                     it("calls mockLocationManager.stopUpdatingLocation()") {
@@ -118,15 +126,16 @@ class LocationRequestHandlerTests: QuickSpec {
                     beforeEach {
                         mockDelegateHandler.resultForDidFailWithErrorReturnValue = stubResult
 
-                        receivedResults = []
-                        for _ in 0..<numSubscribers {
-                            locationRequestHandler.requestLocation { result in
-                                receivedResults.append(result)
-                            }
+                        mockLocationManager.startUpdatingLocationClosure = {
+                            locationRequestHandler.locationManager(dummyLocationManager,
+                                                                   didFailWithError: StubError.plainError)
                         }
 
-                        locationRequestHandler.locationManager(dummyLocationManager,
-                                                               didFailWithError: StubError.plainError)
+                        receivedResults = []
+                        for _ in 0..<numSubscribers {
+                            let result = await locationRequestHandler.requestLocation()
+                            receivedResults.append(result)
+                        }
                     }
 
                     it("calls mockLocationManager.stopUpdatingLocation()") {
