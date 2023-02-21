@@ -27,7 +27,7 @@ import Foundation
 
 // sourcery: AutoMockable
 public protocol LocationRequestHandlerProtocol {
-    func requestLocation(_ callback: @escaping (LocationRequestResult) -> Void)
+    func requestLocation() async -> LocationRequestResult
 }
 
 public class LocationRequestHandler: NSObject, LocationRequestHandlerProtocol {
@@ -51,9 +51,13 @@ public class LocationRequestHandler: NSObject, LocationRequestHandlerProtocol {
         locationManager.delegate = self
     }
 
-    public func requestLocation(_ callback: @escaping (LocationRequestResult) -> Void) {
-        callbacksQueue.async { [weak self] in
-            self?.resultCallbacks.append(LocationResultCallback(resultCallback: callback))
+    public func requestLocation() async -> LocationRequestResult {
+        await withCheckedContinuation { [weak self] continuation in
+            self?.callbacksQueue.async { [weak self] in
+                let callback = LocationResultCallback(continuation: continuation)
+                self?.resultCallbacks.append(callback)
+            }
+
             self?.locationManager.startUpdatingLocation()
         }
     }
@@ -64,16 +68,21 @@ extension LocationRequestHandler: CLLocationManagerDelegate {
 
     @objc
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let result = delegateHandler.resultForDidUpdateLocations(locations,
-                                                                       dateManagerInitialized: dateInitialized)
-        else { return }
+        guard let result = delegateHandler.resultForDidUpdateLocations(
+            locations,
+            dateManagerInitialized: dateInitialized
+        ) else {
+            return
+        }
 
         notifyCallbacks(result)
     }
 
     @objc
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        guard let result = delegateHandler.resultForDidFailWithError(error) else { return }
+        guard let result = delegateHandler.resultForDidFailWithError(error) else {
+            return
+        }
 
         notifyCallbacks(result)
     }
@@ -87,22 +96,22 @@ extension LocationRequestHandler: CLLocationManagerDelegate {
     }
 
     private func handleNotifyCallbacks(_ result: LocationRequestResult) {
-        resultCallbacks = resultCallbacks.filter { $0.callback != nil }
+        resultCallbacks = resultCallbacks.filter { $0.callbackInvocation != nil }
 
-        resultCallbacks.forEach {
-            $0.callback?(result)
+        resultCallbacks.forEach { callback in
+            callback.callbackInvocation?(result)
         }
     }
 
 }
 
 private class LocationResultCallback {
-    var callback: ((LocationRequestResult) -> Void)?
+    var callbackInvocation: ((LocationRequestResult) -> Void)?
 
-    init(resultCallback: @escaping (LocationRequestResult) -> Void) {
-        self.callback = { [weak self] result in
-            resultCallback(result)
-            self?.callback = nil
+    init(continuation: CheckedContinuation<LocationRequestResult, Never>) {
+        self.callbackInvocation = { [weak self] result in
+            continuation.resume(returning: result)
+            self?.callbackInvocation = nil
         }
     }
 }

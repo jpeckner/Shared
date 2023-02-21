@@ -178,15 +178,16 @@ public class LocationRequestHandlerProtocolMock: LocationRequestHandlerProtocol 
     public var requestLocationCalled: Bool {
         return requestLocationCallsCount > 0
     }
-    public var requestLocationReceivedCallback: ((LocationRequestResult) -> Void)?
-    public var requestLocationReceivedInvocations: [((LocationRequestResult) -> Void)] = []
-    public var requestLocationClosure: ((@escaping (LocationRequestResult) -> Void) -> Void)?
+    public var requestLocationReturnValue: LocationRequestResult!
+    public var requestLocationClosure: (() async -> LocationRequestResult)?
 
-    public func requestLocation(_ callback: @escaping (LocationRequestResult) -> Void) {
+    public func requestLocation() async -> LocationRequestResult {
         requestLocationCallsCount += 1
-        requestLocationReceivedCallback = callback
-        requestLocationReceivedInvocations.append(callback)
-        requestLocationClosure?(callback)
+        if let requestLocationClosure = requestLocationClosure {
+            return await requestLocationClosure()
+        } else {
+            return requestLocationReturnValue
+        }
     }
 
 }
