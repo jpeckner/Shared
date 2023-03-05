@@ -105,7 +105,7 @@ public actor DecodableService: DecodableServiceProtocol {
                                                                         underlyingError: error)))
             }
 
-        case .networkDataServiceError,
+        case .urlSessionTaskError,
              .unexpectedResponseType:
             return .failure(.unexpected(.httpServiceError(underlyingError: error)))
         }

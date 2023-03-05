@@ -35,7 +35,7 @@ public struct HTTPServiceSuccess: Sendable {
 }
 
 public enum HTTPServiceError: Error, Sendable {
-    case networkDataServiceError(IgnoredEquatable<Error>)
+    case urlSessionTaskError(Error)
     case unexpectedResponseType(Data, URLResponse)
     case nonSuccessfulStatusCode(Data, HTTPURLResponse)
 }
@@ -73,7 +73,7 @@ public actor HTTPService: HTTPServiceProtocol {
                                              response: httpURLResponse)
             return .success(success)
         } catch {
-            return .failure(.networkDataServiceError(IgnoredEquatable(error)))
+            return .failure(.urlSessionTaskError(error))
         }
     }
 

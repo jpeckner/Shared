@@ -197,9 +197,9 @@ class DecodableServiceTests: QuickSpec {
 
             }
 
-            context("else when the HTTPService passes back a .failure(.networkDataServiceError) result") {
+            context("else when the HTTPService passes back a .failure(.urlSessionTaskError) result") {
 
-                let stubHTTPServiceError = HTTPServiceError.networkDataServiceError(IgnoredEquatable(StubError.plainError))
+                let stubHTTPServiceError = HTTPServiceError.urlSessionTaskError(StubError.plainError)
 
                 beforeEach { _ in
                     mockHTTPService.performHTTPRequestUrlRequestSuccessStatusCodesReturnValue =
@@ -210,13 +210,13 @@ class DecodableServiceTests: QuickSpec {
 
                 it("passes back error .httpServiceError") {
                     guard case let .failure(.unexpected(.httpServiceError(error))) = returnedResult,
-                          case let .networkDataServiceError(underlyingError) = error as? HTTPServiceError
+                          case let .urlSessionTaskError(underlyingError) = error as? HTTPServiceError
                     else {
                         fail("Unexpected result: \(String(describing: returnedResult))")
                         return
                     }
 
-                    expect(underlyingError.value as? StubError) == .plainError
+                    expect(underlyingError as? StubError) == .plainError
                 }
 
             }
