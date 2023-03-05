@@ -131,13 +131,13 @@ class HTTPServiceTests: QuickSpec {
                                                                           successStatusCodes: [200])
                 }
 
-                it("passes back .failure(.networkDataServiceError)") {
-                    guard case let .failure(.networkDataServiceError(error)) = returnedResult else {
+                it("passes back .failure(.urlSessionTaskError)") {
+                    guard case let .failure(.urlSessionTaskError(error)) = returnedResult else {
                         fail("Unexpected value found: \(String(describing: returnedResult))")
                         return
                     }
 
-                    expect(error.value as? StubError) == stubNetworkServiceError
+                    expect(error as? StubError) == stubNetworkServiceError
                 }
             }
 
