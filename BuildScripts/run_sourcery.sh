@@ -1,11 +1,6 @@
 #!/bin/bash
 
 set -e
-
-sourcery                                    \
-  --sources "Shared"                        \
-  --templates "Shared/Sourcery/Templates"   \
-  --output "Shared/Sourcery/Output"
   
 sourcery                                                                    \
   --sources "Shared"                                                        \
