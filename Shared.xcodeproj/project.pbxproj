@@ -82,12 +82,15 @@
 		CA8B0F442479DDAD0039CB06 /* View+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8B0F432479DDAD0039CB06 /* View+Size.swift */; };
 		CA8BE08423E4B92C003F6DED /* ValueObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8BE08323E4B92C003F6DED /* ValueObservable.swift */; };
 		CA8E27D423A5AEB70044A653 /* IgnoredHashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E27D323A5AEB70044A653 /* IgnoredHashable.swift */; };
+		CAA5EAAF2A25569A0000A3F0 /* SearchBarEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5EAAE2A25569A0000A3F0 /* SearchBarEventPublisher.swift */; };
+		CAA5EAB32A2582BA0000A3F0 /* UIResponder+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5EAB22A2582BA0000A3F0 /* UIResponder+FirstResponder.swift */; };
+		CAA5EAB52A2582EE0000A3F0 /* SearchBarEditEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5EAB42A2582EE0000A3F0 /* SearchBarEditEvent.swift */; };
 		CAC52E5A2984956B0087B6AA /* DecodableServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D2F889AB93DE16041BD9AAC6C2C52A /* DecodableServiceTests.swift */; };
 		CAC52E5C2985DED00087B6AA /* AsyncStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC52E5B2985DED00087B6AA /* AsyncStorage.swift */; };
 		CAD3B329247089B200ED010F /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = CAD3B328247089B200ED010F /* Quick */; };
 		CAD3B32C247089CE00ED010F /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = CAD3B32B247089CE00ED010F /* Nimble */; };
 		CAD4806B244CBC3600978799 /* SingleContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48069244CBC3600978799 /* SingleContentViewController.swift */; };
-		CAD4806E244CBD3F00978799 /* SearchBarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806C244CBD3F00978799 /* SearchBarWrapper.swift */; };
+		CAD4806E244CBD3F00978799 /* SearchBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */; };
 		CAD4806F244CBD3F00978799 /* TabItemProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806D244CBD3F00978799 /* TabItemProperties.swift */; };
 		CAD48071244CBD5300978799 /* PopCallbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48070244CBD5300978799 /* PopCallbackViewController.swift */; };
 		CAD48073244CBDFE00978799 /* TabSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */; };
@@ -251,9 +254,12 @@
 		CA8B0F432479DDAD0039CB06 /* View+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Size.swift"; sourceTree = "<group>"; };
 		CA8BE08323E4B92C003F6DED /* ValueObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueObservable.swift; sourceTree = "<group>"; };
 		CA8E27D323A5AEB70044A653 /* IgnoredHashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoredHashable.swift; sourceTree = "<group>"; };
+		CAA5EAAE2A25569A0000A3F0 /* SearchBarEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarEventPublisher.swift; sourceTree = "<group>"; };
+		CAA5EAB22A2582BA0000A3F0 /* UIResponder+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+FirstResponder.swift"; sourceTree = "<group>"; };
+		CAA5EAB42A2582EE0000A3F0 /* SearchBarEditEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarEditEvent.swift; sourceTree = "<group>"; };
 		CAC52E5B2985DED00087B6AA /* AsyncStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorage.swift; sourceTree = "<group>"; };
 		CAD48069244CBC3600978799 /* SingleContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleContentViewController.swift; sourceTree = "<group>"; };
-		CAD4806C244CBD3F00978799 /* SearchBarWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarWrapper.swift; sourceTree = "<group>"; };
+		CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarConfig.swift; sourceTree = "<group>"; };
 		CAD4806D244CBD3F00978799 /* TabItemProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabItemProperties.swift; sourceTree = "<group>"; };
 		CAD48070244CBD5300978799 /* PopCallbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopCallbackViewController.swift; sourceTree = "<group>"; };
 		CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabSelectionViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +393,7 @@
 				A9BCBACEC762C719E7FBA3D37546C740 /* UIImage+Size.swift */,
 				FEFC855BAA84B943F3FDADEC8DBC0C06 /* UIImageView+Init.swift */,
 				510FADE16E6684D566B320753E8698F5 /* UILabel+Text.swift */,
+				CAA5EAB22A2582BA0000A3F0 /* UIResponder+FirstResponder.swift */,
 				6522A092730576589DFE395C3F9E90EA /* UIScrollView+Bounce.swift */,
 				23E3BD89E4231F109E22F1B7BD96D35B /* UITableView+Registration.swift */,
 				312439E9ADEDD7DC2FA99D2CB4DD9DB0 /* UITableView+Scroll.swift */,
@@ -625,7 +632,9 @@
 		C34E86BD74B5543C941D281EFF6808A0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				CAD4806C244CBD3F00978799 /* SearchBarWrapper.swift */,
+				CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */,
+				CAA5EAB42A2582EE0000A3F0 /* SearchBarEditEvent.swift */,
+				CAA5EAAE2A25569A0000A3F0 /* SearchBarEventPublisher.swift */,
 				27B9359A81C017C9FB6D0DE1E200DFE0 /* SpecifiedSizeClass.swift */,
 				CAD4806D244CBD3F00978799 /* TabItemProperties.swift */,
 				28E85F92CE4AADA8B0337FF5BAC60059 /* UIWindowProtocol.swift */,
@@ -878,6 +887,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6C098B2C0FCF8519006AF76FD9DB37A /* ActionableButton.swift in Sources */,
+				CAA5EAAF2A25569A0000A3F0 /* SearchBarEventPublisher.swift in Sources */,
 				3EB45E6C1B12FCF842331C108F940EB9 /* AssertionHandler.swift in Sources */,
 				9FB4316C0D7721DDC0057521F9B306CC /* CLLocationCoordinate2D+Location.swift in Sources */,
 				6DDAAF803E902412D427002E65783364 /* CLLocationManagerAuthProtocol.swift in Sources */,
@@ -902,6 +912,7 @@
 				2E3EAC9B54B62E2936A1624612607F49 /* NonEmptyArray.swift in Sources */,
 				1EC15D26EDB206B4941E204EAA32037E /* NonEmptyString.swift in Sources */,
 				C61BEB13F054769916A70DC1E7CCFEE3 /* Percentage.swift in Sources */,
+				CAA5EAB32A2582BA0000A3F0 /* UIResponder+FirstResponder.swift in Sources */,
 				B9681DC70140C6A9279C9316C3D36FC0 /* RetryStatusError.swift in Sources */,
 				FEFFFF2F68808735A7CF93C9B7E0D6CE /* SpecifiedSizeClass.swift in Sources */,
 				6EB4A9B3184EF64A578E06208CA71140 /* String+CharacterSet.swift in Sources */,
@@ -933,7 +944,7 @@
 				D9914175F03DD7418A981759C1C2126F /* UITableViewCell+Appearance.swift in Sources */,
 				DA500C7AA38743C61B44B02B0B18A3C2 /* UITextField+Styling.swift in Sources */,
 				076F19EAB96084DDD6402BFD866BBFFB /* UIView+Fit.swift in Sources */,
-				CAD4806E244CBD3F00978799 /* SearchBarWrapper.swift in Sources */,
+				CAD4806E244CBD3F00978799 /* SearchBarConfig.swift in Sources */,
 				10B7CB2AC1E87611F1D3C0084653FB37 /* UIView+Margins.swift in Sources */,
 				0F4CD2926B446D87CE804EC22AF394E5 /* UIViewController+Children.swift in Sources */,
 				CAD4806F244CBD3F00978799 /* TabItemProperties.swift in Sources */,
@@ -943,6 +954,7 @@
 				807C52CCDFAF4D6F3B580F1637410F48 /* URLOpenerService.swift in Sources */,
 				F33B61C39907F1A51092C75B1CC42702 /* URLRequest+Init.swift in Sources */,
 				53FDDA370E2103DA228B0870F2E03A8D /* URLSessionProtocol.swift in Sources */,
+				CAA5EAB52A2582EE0000A3F0 /* SearchBarEditEvent.swift in Sources */,
 				CA8BE08423E4B92C003F6DED /* ValueObservable.swift in Sources */,
 				F84136DF8823390C2AF104E851EEC450 /* ViewColoring.swift in Sources */,
 			);
