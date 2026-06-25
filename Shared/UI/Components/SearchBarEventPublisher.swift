@@ -23,6 +23,7 @@
 //  SOFTWARE.
 
 import Combine
+import UIKit
 
 public class SearchBarEventPublisher: NSObject {
 

@@ -4,21 +4,13 @@ Shared is a Swift iOS framework containing code for networking, location service
 
 # Installation
 
-### CocoaPods
+### Swift Package Manager (SPM)
 
-Add the following to your Podfile, then run `pod install`:
-
-`pod 'Shared', :git => 'https://github.com/jpeckner/Shared.git', :branch => 'master'`
-
-### Carthage
-
-Add the following to your Cartfile, then run `carthage update Shared`:
-
-`github "jpeckner/Shared"`
+Point SPM to https://github.com/jpeckner/Shared.git (matching to an exact version is recommended)
 
 ### Submodule/manually
 
-If you prefer not to use either of the above dependency managers, you can integrate Shared into your project manually.
+If you prefer not to use SPM, you can integrate Shared into your project manually.
 
 # Built With
 
