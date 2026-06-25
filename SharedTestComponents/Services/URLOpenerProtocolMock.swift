@@ -24,6 +24,7 @@
 
 import Foundation
 import Shared
+import UIKit
 
 // swiftlint:disable identifier_name
 // swiftlint:disable implicitly_unwrapped_optional
