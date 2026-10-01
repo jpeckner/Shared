@@ -29,6 +29,3 @@ public protocol DecoderProtocol: Sendable {
 }
 
 extension JSONDecoder: DecoderProtocol {}
-
-// This can be removed when this library only supports iOS 16 or higher, as JSONDecoder conforms to `Sendable` then
-extension JSONDecoder: @unchecked Sendable {}
