@@ -76,6 +76,7 @@
 		C2E6644763B63D3BCE76481EAB214DE8 /* StubDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA17BE023ABABD7F5BE8B1F9DC72A31 /* StubDecodable.swift */; };
 		C61BEB13F054769916A70DC1E7CCFEE3 /* Percentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653900693062A5BEF7417DAB1C250BD8 /* Percentage.swift */; };
 		C672D13652CF245521230F35B6579363 /* HTTPServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313636CB848D834B8583DD8196AD7C76 /* HTTPServiceTests.swift */; };
+		CA57C55D306E08D20021DC62 /* DecodableServiceProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57C55C306E08D20021DC62 /* DecodableServiceProtocolMock.swift */; };
 		CA8481E424301C350011CC24 /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8481E324301C350011CC24 /* AutoMockable.generated.swift */; };
 		CA89B89322B5CF0A00CBECE0 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */; };
 		CA8B0F422479DBA30039CB06 /* EdgeInsets+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8B0F412479DBA30039CB06 /* EdgeInsets+Init.swift */; };
@@ -247,6 +248,7 @@
 		C1666DAB6E72F75587B6429E57DFD6B5 /* UIColorInitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorInitTests.swift; sourceTree = "<group>"; };
 		C18FC5B9A9FA38386268E29ADC5DDF65 /* UIColorDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorDecodable.swift; sourceTree = "<group>"; };
 		C805DA40A5E72108B6F72819FDC89EF8 /* TextColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextColoring.swift; sourceTree = "<group>"; };
+		CA57C55C306E08D20021DC62 /* DecodableServiceProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableServiceProtocolMock.swift; sourceTree = "<group>"; };
 		CA5B668F22B18473002E1C86 /* run_sourcery.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run_sourcery.sh; sourceTree = "<group>"; };
 		CA8481E324301C350011CC24 /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
 		CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		277708FA42A1FE763EB47A5078A514AC /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				CA57C55C306E08D20021DC62 /* DecodableServiceProtocolMock.swift */,
 				56340CA7796B3268BD202CCF42D2AC17 /* DecoderProtocolMock.swift */,
 				163F0DD122202225544372822720F91D /* HTTPURLResponse+Stub.swift */,
 				ADA17BE023ABABD7F5BE8B1F9DC72A31 /* StubDecodable.swift */,
@@ -839,6 +842,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3079A7CF16EE6F5F3D32DAC91898C9FB /* Array+Access.swift in Sources */,
+				CA57C55D306E08D20021DC62 /* DecodableServiceProtocolMock.swift in Sources */,
 				CA8481E424301C350011CC24 /* AutoMockable.generated.swift in Sources */,
 				DBB3EED64C6E9B4905C44FBEE6078806 /* CLAuthorizationStatus+Cases.swift in Sources */,
 				7DF5192DA0F735828CE84A79918DE600 /* CLLocationProtocolStub.swift in Sources */,

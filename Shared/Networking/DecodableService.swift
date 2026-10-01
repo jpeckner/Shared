@@ -37,6 +37,7 @@ public enum DecodableServiceUnexpectedError: Error {
     case noDataReturned(URLResponse)
     case failedToDecodeObject(Data, HTTPURLResponse, underlyingError: Error)
     case failedToDecodeErrorPayload(Data, HTTPURLResponse, underlyingError: Error)
+    case other(underlyingError: Error)
 }
 
 public typealias DecodableServiceResult<
