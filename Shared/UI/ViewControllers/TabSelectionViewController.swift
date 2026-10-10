@@ -57,8 +57,6 @@ public class TabSelectionViewController: UITabBarController {
 
 extension TabSelectionViewController {
 
-    // Using traitCollectionDidChange() would be preferrable, but iOS 13 no longer calls that method when the view
-    // controller initially loads: https://useyourloaf.com/blog/predicting-size-classes-in-ios-13/
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -66,7 +64,9 @@ extension TabSelectionViewController {
     }
 
     private func adjustTabImageInsets() {
-        guard let horizontalSizeClass = horizontalSpecifiedClass else { return }
+        guard let horizontalSizeClass = horizontalSpecifiedClass else {
+            return
+        }
 
         adjustTabImageInsets(horizontalSizeClass)
     }

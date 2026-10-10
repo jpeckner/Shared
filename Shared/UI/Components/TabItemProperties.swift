@@ -25,26 +25,17 @@
 import UIKit
 
 public struct TabItemProperties {
-    let imageName: String
+    let image: UIImage
 
-    public init(imageName: String) {
-        self.imageName = imageName
+    public init(image: UIImage) {
+        self.image = image
     }
 }
 
 public extension UIViewController {
 
-    // https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/custom-icons/ lists specific
-    // heights to use at the URL below, but using them with vector images, such as
-    // https://stackoverflow.com/a/37627080/1342984 describes, results in the images being too small. Using 32x32 tab
-    // icons displays the desired size correctly on all current iPhones and iPads.
-    private static let tabImageSize = CGSize(width: 32.0, height: 32.0)
-
-    func configure(_ properties: TabItemProperties) {
-        guard let image = UIImage(named: properties.imageName) else { return }
-
-        let templateImage = image.withRenderingMode(.alwaysTemplate)
-        tabBarItem.image = templateImage.with(size: UIViewController.tabImageSize)
+    func configure(properties: TabItemProperties) {
+        tabBarItem.image = properties.image.withRenderingMode(.alwaysTemplate)
     }
 
 }
@@ -53,12 +44,23 @@ public extension UITabBarController {
 
     // Concept for method from https://stackoverflow.com/a/46392579/1342984
     func adjustTabImageInsets(_ horizontalSizeClass: SpecifiedSizeClass) {
-        tabBar.items?.forEach {
+        if #available(iOS 26.0, *) {
+            // In iOS 26+, the tab bar insets are set automatically
+            return
+        }
+
+        tabBar.items?.forEach { item in
             switch horizontalSizeClass {
             case .compact:
-                $0.imageInsets = UIEdgeInsets(top: 6.0, left: 0.0, bottom: -6.0, right: 0.0)
+                item.imageInsets = UIEdgeInsets(
+                    top: 6.0,
+                    left: 0.0,
+                    bottom: -6.0,
+                    right: 0.0
+                )
+
             case .regular:
-                $0.imageInsets = .zero
+                item.imageInsets = .zero
             }
         }
     }
