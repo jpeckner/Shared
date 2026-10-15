@@ -1,8 +1,8 @@
 //
-//  SpecifiedSizeClass.swift
+//  HorizontalSizeClass.swift
 //  Shared
 //
-//  Copyright (c) 2019 Justin Peckner
+//  Copyright (c) 2026 Justin Peckner
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,24 @@
 
 import UIKit
 
-public enum SpecifiedSizeClass {
+public enum HorizontalSizeClass {
     case compact
     case regular
 }
 
-public extension SpecifiedSizeClass {
+public extension HorizontalSizeClass {
 
     init?(uiSizeClass: UIUserInterfaceSizeClass) {
         switch uiSizeClass {
         case .compact:
             self = .compact
+
         case .regular:
             self = .regular
+
         case .unspecified:
             return nil
+
         @unknown default:
             fatalError("Unknown UIUserInterfaceSizeClass case: \(uiSizeClass)")
         }
@@ -48,8 +51,8 @@ public extension SpecifiedSizeClass {
 
 public extension UIViewController {
 
-    var horizontalSpecifiedClass: SpecifiedSizeClass? {
-        return SpecifiedSizeClass(uiSizeClass: traitCollection.horizontalSizeClass)
+    var horizontalSizeClass: HorizontalSizeClass? {
+        return HorizontalSizeClass(uiSizeClass: traitCollection.horizontalSizeClass)
     }
 
 }
