@@ -92,7 +92,6 @@
 		CAD4806B244CBC3600978799 /* SingleContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48069244CBC3600978799 /* SingleContentViewController.swift */; };
 		CAD4806E244CBD3F00978799 /* SearchBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */; };
 		CAD4806F244CBD3F00978799 /* TabItemProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806D244CBD3F00978799 /* TabItemProperties.swift */; };
-		CAD48071244CBD5300978799 /* PopCallbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48070244CBD5300978799 /* PopCallbackViewController.swift */; };
 		CAD48073244CBDFE00978799 /* TabSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */; };
 		CAE208AE2378ED4000F1AED9 /* Text+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */; };
 		CAE208B02378ED7E00F1AED9 /* UIFont+CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */; };
@@ -261,7 +260,6 @@
 		CAD48069244CBC3600978799 /* SingleContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleContentViewController.swift; sourceTree = "<group>"; };
 		CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarConfig.swift; sourceTree = "<group>"; };
 		CAD4806D244CBD3F00978799 /* TabItemProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabItemProperties.swift; sourceTree = "<group>"; };
-		CAD48070244CBD5300978799 /* PopCallbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopCallbackViewController.swift; sourceTree = "<group>"; };
 		CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabSelectionViewController.swift; sourceTree = "<group>"; };
 		CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Styling.swift"; sourceTree = "<group>"; };
 		CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CTFont.swift"; sourceTree = "<group>"; };
@@ -686,7 +684,6 @@
 		CAD48067244CBC3600978799 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CAD48070244CBD5300978799 /* PopCallbackViewController.swift */,
 				CAD48069244CBC3600978799 /* SingleContentViewController.swift */,
 				CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */,
 			);
@@ -926,7 +923,6 @@
 				8CD09B489EE0AB673E4C630B38DC6B19 /* UIButton+Styling.swift in Sources */,
 				CAE208B42378EE7900F1AED9 /* Button+Styling.swift in Sources */,
 				5788983ED127EE22304C962A16D523C3 /* UIColor+Components.swift in Sources */,
-				CAD48071244CBD5300978799 /* PopCallbackViewController.swift in Sources */,
 				22AAA70ACA35B6B73D281A613755805C /* UIColor+Init.swift in Sources */,
 				CAD48073244CBDFE00978799 /* TabSelectionViewController.swift in Sources */,
 				31AA05E003FB6C0D5FAFF29C61B6C87A /* UIColorDecodable.swift in Sources */,
