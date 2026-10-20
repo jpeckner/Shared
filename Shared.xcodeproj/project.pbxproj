@@ -77,6 +77,7 @@
 		C61BEB13F054769916A70DC1E7CCFEE3 /* Percentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653900693062A5BEF7417DAB1C250BD8 /* Percentage.swift */; };
 		C672D13652CF245521230F35B6579363 /* HTTPServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313636CB848D834B8583DD8196AD7C76 /* HTTPServiceTests.swift */; };
 		CA57C55D306E08D20021DC62 /* DecodableServiceProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA57C55C306E08D20021DC62 /* DecodableServiceProtocolMock.swift */; };
+		CA6F9CB5308183B1003A55C1 /* HorizontalSizeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6F9CB4308183B1003A55C1 /* HorizontalSizeClass.swift */; };
 		CA8481E424301C350011CC24 /* AutoMockable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8481E324301C350011CC24 /* AutoMockable.generated.swift */; };
 		CA89B89322B5CF0A00CBECE0 /* UIView+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */; };
 		CA8B0F422479DBA30039CB06 /* EdgeInsets+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8B0F412479DBA30039CB06 /* EdgeInsets+Init.swift */; };
@@ -92,7 +93,6 @@
 		CAD4806B244CBC3600978799 /* SingleContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48069244CBC3600978799 /* SingleContentViewController.swift */; };
 		CAD4806E244CBD3F00978799 /* SearchBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */; };
 		CAD4806F244CBD3F00978799 /* TabItemProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD4806D244CBD3F00978799 /* TabItemProperties.swift */; };
-		CAD48071244CBD5300978799 /* PopCallbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48070244CBD5300978799 /* PopCallbackViewController.swift */; };
 		CAD48073244CBDFE00978799 /* TabSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */; };
 		CAE208AE2378ED4000F1AED9 /* Text+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */; };
 		CAE208B02378ED7E00F1AED9 /* UIFont+CTFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */; };
@@ -120,7 +120,6 @@
 		F91AEE8DBC77A50CA044421B6121F966 /* CLLocationManagerRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A53673AEF27F672200386F9C50BC15 /* CLLocationManagerRequestProtocol.swift */; };
 		FC03F12ADF304C8094A4188A3917892F /* URL+PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D37A3696E6488B1C769CC96BF415DEC /* URL+PathTests.swift */; };
 		FCE32D3660BDEAF7251D708B9CC2233E /* TextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E530A7E999DFA0A3971607854992451 /* TextLayout.swift */; };
-		FEFFFF2F68808735A7CF93C9B7E0D6CE /* SpecifiedSizeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B9359A81C017C9FB6D0DE1E200DFE0 /* SpecifiedSizeClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,7 +180,6 @@
 		26449C0C7D18D3BF35A8457504357870 /* LocationRequestHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestHandlerTests.swift; sourceTree = "<group>"; };
 		2672FBDCFA80BD181140EBCFD976D535 /* ActionableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionableButton.swift; sourceTree = "<group>"; };
 		27891ED83D9FB9EB40228099C4B0DB3A /* UIView+Margins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Margins.swift"; sourceTree = "<group>"; };
-		27B9359A81C017C9FB6D0DE1E200DFE0 /* SpecifiedSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecifiedSizeClass.swift; sourceTree = "<group>"; };
 		28E85F92CE4AADA8B0337FF5BAC60059 /* UIWindowProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowProtocol.swift; sourceTree = "<group>"; };
 		2ECE01979539407E897CDFC767A44121 /* URLRequest+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Init.swift"; sourceTree = "<group>"; };
 		30C2AF49359FA00F2CBC1CB894F1080D /* DecodableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableService.swift; sourceTree = "<group>"; };
@@ -249,6 +247,7 @@
 		C805DA40A5E72108B6F72819FDC89EF8 /* TextColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextColoring.swift; sourceTree = "<group>"; };
 		CA57C55C306E08D20021DC62 /* DecodableServiceProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableServiceProtocolMock.swift; sourceTree = "<group>"; };
 		CA5B668F22B18473002E1C86 /* run_sourcery.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run_sourcery.sh; sourceTree = "<group>"; };
+		CA6F9CB4308183B1003A55C1 /* HorizontalSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSizeClass.swift; sourceTree = "<group>"; };
 		CA8481E324301C350011CC24 /* AutoMockable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoMockable.generated.swift; sourceTree = "<group>"; };
 		CA89B89222B5CF0A00CBECE0 /* UIView+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Image.swift"; sourceTree = "<group>"; };
 		CA8B0F412479DBA30039CB06 /* EdgeInsets+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+Init.swift"; sourceTree = "<group>"; };
@@ -261,7 +260,6 @@
 		CAD48069244CBC3600978799 /* SingleContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleContentViewController.swift; sourceTree = "<group>"; };
 		CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarConfig.swift; sourceTree = "<group>"; };
 		CAD4806D244CBD3F00978799 /* TabItemProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabItemProperties.swift; sourceTree = "<group>"; };
-		CAD48070244CBD5300978799 /* PopCallbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopCallbackViewController.swift; sourceTree = "<group>"; };
 		CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabSelectionViewController.swift; sourceTree = "<group>"; };
 		CAE208AD2378ED4000F1AED9 /* Text+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Styling.swift"; sourceTree = "<group>"; };
 		CAE208AF2378ED7E00F1AED9 /* UIFont+CTFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+CTFont.swift"; sourceTree = "<group>"; };
@@ -632,10 +630,10 @@
 		C34E86BD74B5543C941D281EFF6808A0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CA6F9CB4308183B1003A55C1 /* HorizontalSizeClass.swift */,
 				CAD4806C244CBD3F00978799 /* SearchBarConfig.swift */,
 				CAA5EAB42A2582EE0000A3F0 /* SearchBarEditEvent.swift */,
 				CAA5EAAE2A25569A0000A3F0 /* SearchBarEventPublisher.swift */,
-				27B9359A81C017C9FB6D0DE1E200DFE0 /* SpecifiedSizeClass.swift */,
 				CAD4806D244CBD3F00978799 /* TabItemProperties.swift */,
 				28E85F92CE4AADA8B0337FF5BAC60059 /* UIWindowProtocol.swift */,
 			);
@@ -686,7 +684,6 @@
 		CAD48067244CBC3600978799 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CAD48070244CBD5300978799 /* PopCallbackViewController.swift */,
 				CAD48069244CBC3600978799 /* SingleContentViewController.swift */,
 				CAD48072244CBDFE00978799 /* TabSelectionViewController.swift */,
 			);
@@ -912,10 +909,10 @@
 				D98EBF5FB75F610FBE993705846C1859 /* MeasurementSystem.swift in Sources */,
 				2E3EAC9B54B62E2936A1624612607F49 /* NonEmptyArray.swift in Sources */,
 				1EC15D26EDB206B4941E204EAA32037E /* NonEmptyString.swift in Sources */,
+				CA6F9CB5308183B1003A55C1 /* HorizontalSizeClass.swift in Sources */,
 				C61BEB13F054769916A70DC1E7CCFEE3 /* Percentage.swift in Sources */,
 				CAA5EAB32A2582BA0000A3F0 /* UIResponder+FirstResponder.swift in Sources */,
 				B9681DC70140C6A9279C9316C3D36FC0 /* RetryStatusError.swift in Sources */,
-				FEFFFF2F68808735A7CF93C9B7E0D6CE /* SpecifiedSizeClass.swift in Sources */,
 				6EB4A9B3184EF64A578E06208CA71140 /* String+CharacterSet.swift in Sources */,
 				6BCF6EDA8DA2C08688CE8263EE8D418E /* StyledLabel.swift in Sources */,
 				CAE208B22378ED9B00F1AED9 /* NSTextAlignment+TextAlignment.swift in Sources */,
@@ -926,7 +923,6 @@
 				8CD09B489EE0AB673E4C630B38DC6B19 /* UIButton+Styling.swift in Sources */,
 				CAE208B42378EE7900F1AED9 /* Button+Styling.swift in Sources */,
 				5788983ED127EE22304C962A16D523C3 /* UIColor+Components.swift in Sources */,
-				CAD48071244CBD5300978799 /* PopCallbackViewController.swift in Sources */,
 				22AAA70ACA35B6B73D281A613755805C /* UIColor+Init.swift in Sources */,
 				CAD48073244CBDFE00978799 /* TabSelectionViewController.swift in Sources */,
 				31AA05E003FB6C0D5FAFF29C61B6C87A /* UIColorDecodable.swift in Sources */,

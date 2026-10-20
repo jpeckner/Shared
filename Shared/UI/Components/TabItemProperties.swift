@@ -43,7 +43,7 @@ public extension UIViewController {
 public extension UITabBarController {
 
     // Concept for method from https://stackoverflow.com/a/46392579/1342984
-    func adjustTabImageInsets(_ horizontalSizeClass: SpecifiedSizeClass) {
+    func adjustTabImageInsets(_ horizontalSizeClass: HorizontalSizeClass) {
         if #available(iOS 26.0, *) {
             // In iOS 26+, the tab bar insets are set automatically
             return

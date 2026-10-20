@@ -64,7 +64,7 @@ extension TabSelectionViewController {
     }
 
     private func adjustTabImageInsets() {
-        guard let horizontalSizeClass = horizontalSpecifiedClass else {
+        guard let horizontalSizeClass else {
             return
         }
 
